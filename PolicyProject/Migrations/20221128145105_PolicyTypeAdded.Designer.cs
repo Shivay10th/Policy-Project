@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PolicyProject.Data;
 
 namespace PolicyProject.Migrations
 {
     [DbContext(typeof(PolicyProjectContext))]
-    partial class PolicyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20221128145105_PolicyTypeAdded")]
+    partial class PolicyTypeAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PolicyProject.Data;
 
 namespace PolicyProject.Migrations
 {
     [DbContext(typeof(PolicyProjectContext))]
-    partial class PolicyProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20221127130552_changesInUserEntity")]
+    partial class changesInUserEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +29,6 @@ namespace PolicyProject.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CompanyName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Duration")
@@ -42,11 +43,11 @@ namespace PolicyProject.Migrations
                     b.Property<string>("PolicyName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PolicyTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("PolicyType")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("Date");
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("TermsAmount")
                         .HasColumnType("float");
@@ -59,24 +60,7 @@ namespace PolicyProject.Migrations
 
                     b.HasKey("PolicyId");
 
-                    b.HasIndex("PolicyTypeId");
-
                     b.ToTable("Policy");
-                });
-
-            modelBuilder.Entity("PolicyProject.Models.PolicyType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PolicyType");
                 });
 
             modelBuilder.Entity("PolicyProject.Models.User", b =>
@@ -133,15 +117,6 @@ namespace PolicyProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("PolicyProject.Models.Policy", b =>
-                {
-                    b.HasOne("PolicyProject.Models.PolicyType", "PolicyType")
-                        .WithMany("Policies")
-                        .HasForeignKey("PolicyTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

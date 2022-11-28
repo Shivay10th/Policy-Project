@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PolicyProject.Data;
 using PolicyProject.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PolicyProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize(Roles = "Admin")]
+
     public class UsersController : ControllerBase
     {
         private readonly PolicyProjectContext _context;
@@ -55,6 +55,8 @@ namespace PolicyProject.Controllers
             }
 
             _context.Entry(user).State = EntityState.Modified;
+
+
 
             try
             {

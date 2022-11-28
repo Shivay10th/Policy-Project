@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PolicyProject.Models
 {
@@ -15,6 +12,7 @@ namespace PolicyProject.Models
         [Required]
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [Column(TypeName = "Date")]
         public DateTime DOB { get; set; }
         [Required]
         public string ContactNo { get; set; }
@@ -24,10 +22,14 @@ namespace PolicyProject.Models
         public string Email { get; set; }
 
         public double Salary { get; set; }
+        [StringLength(10)]
         public string Pan { get; set; }
+        [Column(TypeName = "char(1)")]
         public string EmployerType { get; set; }
         public string EmployerName { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        [Required]
+        public string Role { get; set; }
     }
 }
