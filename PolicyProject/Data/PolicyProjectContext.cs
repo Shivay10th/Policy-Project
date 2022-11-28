@@ -17,5 +17,6 @@ namespace PolicyProject.Data
         public DbSet<PolicyProject.Models.User> User { get; set; }
 
         public DbSet<PolicyProject.Models.Policy> Policy { get; set; }
+        public DbSet<PolicyProject.Models.PolicyType> PolicyType { get; set; }
     }
 }

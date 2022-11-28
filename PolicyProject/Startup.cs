@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using PolicyProject.Data;
+using PolicyProject.Services.PolicyTypeServices;
 
 namespace PolicyProject
 {
@@ -27,10 +22,13 @@ namespace PolicyProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAutoMapper(typeof(Startup));
+
 
             services.AddDbContext<PolicyProjectContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PolicyProjectContext")));
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IPolicyTypeService, PolicyTypeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
