@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PolicyProject.Dtos.PolicyType;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PolicyProject.Dtos.PolicyTypedto;
 using PolicyProject.Models;
 using PolicyProject.Services.PolicyTypeServices;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace PolicyProject.Controllers
 {
     [Route("api/policy/category")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class PolicyTypeController : ControllerBase
     {
         private readonly IPolicyTypeService _policyTypeService;
@@ -18,6 +20,7 @@ namespace PolicyProject.Controllers
             _policyTypeService = policyTypeService;
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _policyTypeService.GetAllPolicyType());
@@ -34,7 +37,7 @@ namespace PolicyProject.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> GetAddPolicyTypeBy(PolicyTypeDto newPolicyType)
+        public async Task<IActionResult> AddPolicyTypeBy(PolicyTypeDto newPolicyType)
         {
             ServiceResponse<List<PolicyTypeDto>> res = await _policyTypeService.AddPolicyType(newPolicyType);
             return Ok(res);

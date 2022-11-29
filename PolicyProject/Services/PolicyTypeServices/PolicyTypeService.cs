@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PolicyProject.Data;
-using PolicyProject.Dtos.PolicyType;
+using PolicyProject.Dtos.PolicyTypedto;
 using PolicyProject.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +65,7 @@ namespace PolicyProject.Services.PolicyTypeServices
         public async Task<ServiceResponse<List<PolicyTypeDto>>> GetAllPolicyType()
         {
             ServiceResponse<List<PolicyTypeDto>> res = new ServiceResponse<List<PolicyTypeDto>>();
-            List<PolicyType> policyTypeList = await _context.PolicyType.ToListAsync();
+            List<PolicyType> policyTypeList = await _context.PolicyType.Include(pt => pt.Policies).ToListAsync();
             res.Data = (policyTypeList.Select(pt => _mapper.Map<PolicyTypeDto>(pt))).ToList();
             return res;
 

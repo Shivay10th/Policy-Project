@@ -11,7 +11,7 @@ namespace PolicyProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     [Authorize(Roles = "admin")]
 
     public class UsersController : ControllerBase

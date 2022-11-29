@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using PolicyProject.Data;
+using PolicyProject.Services.PolicyServices;
 using PolicyProject.Services.PolicyTypeServices;
 
 namespace PolicyProject
@@ -39,9 +40,14 @@ namespace PolicyProject
                     ValidateAudience = false
                 };
             });
-            services.AddScoped<IAuthRepository, AuthRepository>();
 
+            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IPolicyTypeService, PolicyTypeService>();
+            services.AddScoped<IPolicyservice, PolicyService>();
+
+            // To Ignore the loop while fetchin policies
+            services.AddControllers().AddNewtonsoftJson(x =>
+ x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,10 +58,13 @@ namespace PolicyProject
                 app.UseDeveloperExceptionPage();
             }
 
+            //cors for frontend
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 
             app.UseRouting();
+            //Authentication should be above authorization
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

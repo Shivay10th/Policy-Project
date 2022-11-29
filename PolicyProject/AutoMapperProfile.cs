@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using PolicyProject.Dtos.PolicyType;
+using PolicyProject.Dtos.Policydto;
+using PolicyProject.Dtos.PolicyTypedto;
 using PolicyProject.Models;
 
 namespace PolicyProject
@@ -8,8 +9,13 @@ namespace PolicyProject
     {
         public AutoMapperProfile()
         {
+            //Policy type profile
             CreateMap<PolicyType, PolicyTypeDto>();
             CreateMap<PolicyTypeDto, PolicyType>();
+
+            //Policy Profile
+            CreateMap<Policy, PolicyDto>();
+            CreateMap<PolicyDto, Policy>();
         }
     }
 }

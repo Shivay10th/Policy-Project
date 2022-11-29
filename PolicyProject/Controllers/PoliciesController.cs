@@ -1,105 +1,107 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PolicyProject.Data;
+using PolicyProject.Dtos.Policydto;
+using PolicyProject.Models;
+using PolicyProject.Services.PolicyServices;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PolicyProject.Data;
-using PolicyProject.Models;
 
 namespace PolicyProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class PoliciesController : ControllerBase
     {
         private readonly PolicyProjectContext _context;
+        private readonly IPolicyservice _policyservice;
 
-        public PoliciesController(PolicyProjectContext context)
+        public PoliciesController(PolicyProjectContext context, IPolicyservice policyservice)
         {
             _context = context;
+            _policyservice = policyservice;
         }
 
         // GET: api/Policies
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Policy>>> GetPolicy()
         {
-            return await _context.Policy.ToListAsync();
+            ServiceResponse<ICollection<PolicyDto>> res = await _policyservice.GetAllPolicies();
+            if (res.Success)
+            {
+                return Ok(res);
+            }
+            return BadRequest(res);
         }
 
         // GET: api/Policies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Policy>> GetPolicy(int id)
         {
-            var policy = await _context.Policy.FindAsync(id);
-
-            if (policy == null)
+            ServiceResponse<PolicyDto> res = await _policyservice.GetPolicy(id);
+            if (res.Success)
             {
-                return NotFound();
+                return Ok(res);
             }
-
-            return policy;
+            else
+            {
+                return BadRequest(res);
+            }
+        }
+        [AllowAnonymous]
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Policy>> GetPolicy(string name)
+        {
+            ServiceResponse<PolicyDto> res = await _policyservice.GetPolicy(name);
+            if (res.Success)
+            {
+                return Ok(res);
+            }
+            else
+            {
+                return BadRequest(res);
+            }
         }
 
         // PUT: api/Policies/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPolicy(int id, Policy policy)
+        public async Task<IActionResult> PutPolicy(int id, PolicyDto policy)
         {
-            if (id != policy.PolicyId)
+            ServiceResponse<PolicyDto> res = await _policyservice.UpdatePolicy(policy);
+            if (res.Success)
             {
-                return BadRequest();
-            }
 
-            _context.Entry(policy).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
+                return Ok(res);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PolicyExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return BadRequest(res);
         }
 
         // POST: api/Policies
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Policy>> PostPolicy(Policy policy)
+        public async Task<IActionResult> PostPolicy(PolicyDto policy)
         {
-            _context.Policy.Add(policy);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPolicy", new { id = policy.PolicyId }, policy);
+            ServiceResponse<PolicyDto> res = await _policyservice.AddPolicy(policy);
+            return Ok(res);
         }
 
         // DELETE: api/Policies/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Policy>> DeletePolicy(int id)
+        public async Task<IActionResult> DeletePolicy(int id)
         {
-            var policy = await _context.Policy.FindAsync(id);
-            if (policy == null)
+            ServiceResponse<ICollection<PolicyDto>> res = await _policyservice.DeletePolicy(id);
+            if (res.Success)
             {
-                return NotFound();
+
+                return Ok(res);
             }
-
-            _context.Policy.Remove(policy);
-            await _context.SaveChangesAsync();
-
-            return policy;
+            return BadRequest(res);
         }
 
         private bool PolicyExists(int id)

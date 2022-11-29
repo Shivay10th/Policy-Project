@@ -1,4 +1,4 @@
-﻿using PolicyProject.Dtos.PolicyType;
+﻿using PolicyProject.Dtos.PolicyTypedto;
 using PolicyProject.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
