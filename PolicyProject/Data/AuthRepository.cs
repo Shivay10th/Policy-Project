@@ -38,7 +38,7 @@ namespace PolicyProject.Data
             }
             else
             {
-                res.Data = user.Id.ToString();
+                res.Data = CreateJWTToken(user);
             }
             return res;
 

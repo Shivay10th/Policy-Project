@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using PolicyProject.Data;
 using PolicyProject.Services.PolicyTypeServices;
 
@@ -27,7 +29,18 @@ namespace PolicyProject
 
             services.AddDbContext<PolicyProjectContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PolicyProjectContext")));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(oprions =>
+            {
+                oprions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
             services.AddScoped<IAuthRepository, AuthRepository>();
+
             services.AddScoped<IPolicyTypeService, PolicyTypeService>();
         }
 
@@ -38,6 +51,9 @@ namespace PolicyProject
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 
             app.UseRouting();
 

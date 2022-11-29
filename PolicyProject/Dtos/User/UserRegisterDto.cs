@@ -19,6 +19,7 @@ namespace PolicyProject.Dtos.User
         public string Pan { get; set; }
         public string EmployerType { get; set; }
         public string EmployerName { get; set; }
-public string Password { get; set; }
+        public string Role { get; set; }
+        public string Password { get; set; }
     }
 }
