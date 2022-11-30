@@ -1,0 +1,56 @@
+<section class="mt-2" style="background-color: #eee; border-radius: 20px;">
+
+    <div class="container ">
+        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register New Policy</p>
+        <div class="d-flex justify-content-center " style="height: 100%;">
+            <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+    
+                <div class="p-4 border border-info" style="width: 400px; border-radius: 20px;">
+                    <form  #registerForm="ngForm" (ngSubmit)="registerPolicy(registerForm)">
+                        <div class="mb-2">
+                        <label for="pName"  class="form-label">Policy Name</label>
+                        <input #pName="ngModel" type="text" [(ngModel)]="objSrv.policy.PolicyName"[(ngModel)]="objSrv.policy.PolicyName" class="form-control"  name="pName"  >
+                        </div>
+                        <div class="mb-2">
+                        <label for="sDate" class="form-label">Start Date</label>
+                        <input #sDate="ngModel" type="Date" [(ngModel)]="objSrv.policy.StartDate"class="form-control" name="sDate" >
+                        </div>
+                        <div class="mb-2">
+                        <label for="duration" class="form-label">Duration</label>
+                        <input #duration="ngModel" type="number" [(ngModel)]="objSrv.policy.Duration"class="form-control" name="duration" >
+                        </div>
+                        <div class="mb-2">
+                        <label for="companyName" class="form-label">Company Name</label>
+                        <input #companyName="ngModel" type="text" [(ngModel)]="objSrv.policy.CompanyName"class="form-control" name="companyName" >
+                        </div>
+                        <div class="mb-2">
+                        <label for="initialDepo" class="form-label">Initial Deposite</label>
+                        <input #initialDepo="ngModel" type="number" [(ngModel)]="objSrv.policy.InitialDeposite"class="form-control" name="initialDepo" >
+                        </div>
+                        <div class="mb-2">
+                        <label for="tPerYr" class="form-label">Terms Per Year</label>
+                        <input #tPerYr="ngModel" type="number" [(ngModel)]="objSrv.policy.TermsPerYear"class="form-control" name="tPerYr" >
+                        </div>
+                        <div class="mb-2">
+                        <label for="tAmount" class="form-label">Term Amount</label>
+                        <input #tAmount="ngModel" type="number" [(ngModel)]="objSrv.policy.TermsAmount"class="form-control" name="tAmount" >
+                        </div>
+                        <div class="mb-2">
+                        <label for="interest" class="form-label">Interest</label>
+                        <input #interest="ngModel" type="text"[(ngModel)]="objSrv.policy.Interest" class="form-control" name="interest" >
+                        </div>
+                        <div class="mb-2">
+                        <label for="policyType" class="form-label">PolicyType Id</label>
+                        <input #policyType="ngModel" type="number" [(ngModel)]="objSrv.policy.PolicyTypeId" class="form-control" name="policyType" >
+                        </div>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-primary"  type="submit">Register Policy</button>
+                        </div>      
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>

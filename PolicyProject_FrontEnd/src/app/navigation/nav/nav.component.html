@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg bg-secondary bg-gradient mt-3">
+    <div class="container-fluid ">
+      <a class="navbar-brand text-white" routerLink=" "><i class="fa-brands fa-product-hunt fa-xl"></i>olicyManage</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-white" *ngIf="local.role==='admin'" aria-current="page" routerLink="policy/register">New Policy</a>
+          </li>
+        </ul>
+        <div class="d-flex mx-5"  >
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                <li class="nav-item mx-2 " *ngIf="local.jwt===undefined">
+                  <a class="nav-link active text-white" aria-current="page" routerLink="login"><span class="pe-2">Login</span><i class="fa-solid fa-right-to-bracket"></i></a>
+                </li>
+                <li class="nav-item mx-2" *ngIf="local.jwt===undefined">
+                  <a class="nav-link active text-white" aria-current="page" routerLink="register">Register</a>
+                </li>
+                <li class="nav-item mx-2" *ngIf="local.jwt!==undefined">
+                  <a class="nav-link active text-white" aria-current="page" routerLink="user/profile"><i class="fa-solid fa-user"></i><span class="ps-1">  Profile</span></a>
+                </li>
+                <li class="nav-item mx-2" *ngIf="local.jwt!==undefined" >
+                  <a class="nav-link active text-white" aria-current="page" routerLink="login" (click)="logOut()"><span class="pe-1">  Logout</span><i class="fa-sharp fa-solid fa-right-from-bracket"></i></a>
+                </li>
+
+            </ul>
+            </div>
+      </div>
+    </div>
+  </nav>

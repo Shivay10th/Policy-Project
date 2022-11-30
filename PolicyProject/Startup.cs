@@ -38,9 +38,11 @@ namespace PolicyProject
 
             services.AddAutoMapper(typeof(Startup));
 
-
+            // Dbcontext injection
             services.AddDbContext<PolicyProjectContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PolicyProjectContext")));
+
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(oprions =>
             {
                 oprions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters

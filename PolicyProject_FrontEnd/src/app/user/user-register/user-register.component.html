@@ -1,0 +1,56 @@
+<section class=" mt-2" style="background-color: #eee; border-radius: 20px;">
+
+<div class="container ">
+    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register</p>
+    <div class="d-flex justify-content-center " >
+        <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+
+            <div class="p-4 border border-info" style="width: 400px; border-radius: 20px;">
+                <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+                    <div class="mb-2">
+                    <label for="fname"  class="form-label">First Name</label>
+                    <input #firstname="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.FirstName" name="firstName"  >
+                    </div>
+                    <div class="mb-2">
+                    <label for="lname" class="form-label">Last Name</label>
+                    <input #lastname="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.LastName" name="lname" >
+                    </div>
+                    <div class="mb-2">
+                    <label for="dob" class="form-label">Date Of Birth</label>
+                    <input #dob="ngModel"type="date" class="form-control"[(ngModel)]="objSrv.regcred.DOB" name="dob" >
+                    </div>
+                    <div class="mb-2">
+                    <label for="contact" class="form-label">Contact</label>
+                    <input #contactno="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.ContactNo" name="contact" >
+                    </div>
+                    <div class="mb-2">
+                    <label for="email" class="form-label">Email</label>
+                    <input #email="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.Email" name="email" >
+                    </div>
+                    <div class="mb-2">
+                    <label for="ename" class="form-label">Employer Name</label>
+                    <input #employername="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.EmployerName" name="empName" >
+                    </div>
+                    <div class="mb-2">
+                    <label for="salary" class="form-label">Salary</label>
+                    <input #salary="ngModel"type="number" class="form-control" [(ngModel)]="objSrv.regcred.Salary" name="salary" >
+                    </div>
+                    <div class="mb-2">
+                    <label for="pan" class="form-label">Pan</label>
+                    <input #pan="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.Pan" name="pan" >
+                    </div>
+                    <div class="mb-2">
+                    <label for="password" class="form-label">Password</label>
+                    <input #password="ngModel"type="password" class="form-control" [(ngModel)]="objSrv.regcred.Password" name="password" >
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary"  type="submit">Register User</button>
+                    </div>      
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
