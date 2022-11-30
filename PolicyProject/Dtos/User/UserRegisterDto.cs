@@ -15,11 +15,11 @@ namespace PolicyProject.Dtos.User
         public string ContactNo { get; set; }
         public string Email { get; set; }
 
+        public string Role { get; set; }
         public double Salary { get; set; }
         public string Pan { get; set; }
         public string EmployerType { get; set; }
         public string EmployerName { get; set; }
-        public string Role { get; set; }
         public string Password { get; set; }
     }
 }

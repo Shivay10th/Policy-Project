@@ -17,7 +17,7 @@ namespace PolicyProject.Dtos.Policydto
         public double Interest { get; set; }
 
         public int PolicyTypeId { get; set; }
-        public PolicyType PolicyType { get; set; }
+        public PolicyType? PolicyType { get; set; }
 
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
 using PolicyProject.Data;
 using PolicyProject.Services.PolicyServices;
 using PolicyProject.Services.PolicyTypeServices;
@@ -24,7 +25,17 @@ namespace PolicyProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+
+            // To Ignore the loop while fetchin policies
+            services.AddControllers().AddNewtonsoftJson(x =>
+            {
+
+                x.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                x.SerializerSettings.MaxDepth = 1;
+                x.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
             services.AddAutoMapper(typeof(Startup));
 
 
@@ -41,13 +52,12 @@ namespace PolicyProject
                 };
             });
 
+
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IPolicyTypeService, PolicyTypeService>();
             services.AddScoped<IPolicyservice, PolicyService>();
 
-            // To Ignore the loop while fetchin policies
-            services.AddControllers().AddNewtonsoftJson(x =>
- x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

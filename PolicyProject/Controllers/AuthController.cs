@@ -19,6 +19,7 @@ namespace PolicyProject.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserRegisterDto request)
         {
+            // todo: remove role from request
             ServiceResponse<int> res = await _authRepository.Register(new Models.User
             {
                 FirstName = request.FirstName,
@@ -26,6 +27,7 @@ namespace PolicyProject.Controllers
                 DOB = request.DOB,
                 ContactNo = request.ContactNo,
                 Email = request.Email,
+                Role=request.Role,
                 Salary = request.Salary,
                 Pan = request.Pan,
                 EmployerType = request.EmployerType,
