@@ -72,6 +72,7 @@ namespace PolicyProject.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPolicy(int id, PolicyDto policy)
         {
+            policy.PolicyType = null;
             ServiceResponse<PolicyDto> res = await _policyservice.UpdatePolicy(policy);
             if (res.Success)
             {
@@ -87,6 +88,7 @@ namespace PolicyProject.Controllers
         [HttpPost]
         public async Task<IActionResult> PostPolicy(PolicyDto policy)
         {
+            policy.PolicyType = null;
             ServiceResponse<PolicyDto> res = await _policyservice.AddPolicy(policy);
             return Ok(res);
         }

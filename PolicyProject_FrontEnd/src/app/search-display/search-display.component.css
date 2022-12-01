@@ -1,0 +1,17 @@
+li:hover{
+    color: white;
+    background-color: rgb(220,53,69,0.5);
+    font-weight: bolder;
+    border-radius: 20px;
+
+}
+li{
+    border-radius: 20px;
+}
+.h3{
+    background-color: rgb(254,215,14,0.8);
+    border-radius: 20px;
+    margin-top: 20px;
+    color:  white;
+    font-weight: bolder;
+}

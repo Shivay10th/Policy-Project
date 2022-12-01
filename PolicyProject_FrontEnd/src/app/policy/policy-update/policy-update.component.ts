@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PolicyTypeService } from 'src/app/policyType/policy-type.service';
 import { Policy } from 'src/app/shared/policy/policy.model';
 import { PolicyService } from 'src/app/shared/policy/policy.service';
 
@@ -10,14 +11,24 @@ import { PolicyService } from 'src/app/shared/policy/policy.service';
 })
 export class PolicyUpdateComponent implements OnInit {
 
-  constructor(private route:ActivatedRoute,public policyService:PolicyService) { }
   policy:Policy;
-  policyId;number;
+  policyId;
+
+  constructor(private activatedRoute:ActivatedRoute,private route:Router,public policyService:PolicyService,public objPolicyType:PolicyTypeService) { }
+
   ngOnInit(): void {
-    this.policyId=this.route.snapshot.paramMap.get('id')
+    this.objPolicyType.getPolicyTypes();
+    this.policyId=this.activatedRoute.snapshot.paramMap.get('id')
     this.policyService.getPolicyById(this.policyId).subscribe(res=>{
-      console.log(res);
+      this.policy= res["Data"] as Policy      
     })
   }
-
+  updatePolicy(){
+    this.policyService.updatepolicy(this.policyId,this.policy).subscribe(res=>{
+      this.route.navigateByUrl('/policies');
+    },err=>{
+      console.log(err);
+    })
+  }
+  
 }

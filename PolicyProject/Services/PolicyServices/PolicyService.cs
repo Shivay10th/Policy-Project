@@ -71,7 +71,7 @@ namespace PolicyProject.Services.PolicyServices
         public async Task<ServiceResponse<PolicyDto>> GetPolicy(int id)
         {
             ServiceResponse<PolicyDto> res = new ServiceResponse<PolicyDto>();
-            Policy p = await _context.Policy.FirstOrDefaultAsync(p => p.PolicyId == id);
+            Policy p = await _context.Policy.Include(p=>p.PolicyType).FirstOrDefaultAsync(p => p.PolicyId == id);
             if (p != null)
             {
                 res.Data = _mapper.Map<PolicyDto>(p);
@@ -88,7 +88,7 @@ namespace PolicyProject.Services.PolicyServices
         public async Task<ServiceResponse<ICollection<PolicyDto>>> GetPolicy(string PolicyName)
         {
             ServiceResponse<ICollection<PolicyDto>> res = new ServiceResponse<ICollection<PolicyDto>>();
-            List<Policy> policyList = await _context.Policy.Where(p=>p.PolicyName.ToLower().Contains(PolicyName.Trim().ToLower())).ToListAsync();
+            List<Policy> policyList = await _context.Policy.Include(p=>p.PolicyType).Where(p=>p.PolicyName.ToLower().Contains(PolicyName.Trim().ToLower())).ToListAsync();
             if (policyList != null)
             {
                 res.Data = (policyList.Select(pl => _mapper.Map<PolicyDto>(pl))).ToList();

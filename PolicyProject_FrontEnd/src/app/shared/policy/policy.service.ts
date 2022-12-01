@@ -18,13 +18,16 @@ export class PolicyService {
   }
   
   registerPolicy(){
-
+console.log(this.policy.PolicyType=null)
 
     return this.http.post(this.apiUrl,this.policy,{headers:this._authHeader()})
   }
 
   getPolicyById(policyId:number){
     return this.http.get(this.apiUrl+policyId,{headers:this._authHeader()});
+  }
+  getPolicyByName(policyName:string){
+    return this.http.get(this.apiUrl+"search/"+policyName,{headers:this._authHeader()});
   }
   // get List of Policies
 
@@ -36,8 +39,9 @@ export class PolicyService {
     return this.http.delete(this.apiUrl+PolicyId,{headers:this._authHeader()});
   }
 
-  updatepolicy(PolicyId){
-    return this.http.delete(this.apiUrl+PolicyId,{headers:this._authHeader()});
+  updatepolicy(PolicyId,policy){
+    policy.policyType=null;
+    return this.http.put(this.apiUrl+PolicyId,policy,{headers:this._authHeader()},);
   }
 
 }

@@ -10,4 +10,5 @@ export class Policy {
      TermsAmount;
      Interest;
      PolicyTypeId;
+     PolicyType;
 }

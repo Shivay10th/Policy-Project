@@ -31,7 +31,6 @@ namespace PolicyProject
             {
 
                 x.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-                x.SerializerSettings.MaxDepth = 1;
                 x.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });

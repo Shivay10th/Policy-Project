@@ -7,7 +7,7 @@
                 <div class="card-body p-md-5">
     
                 <div class="p-4 border border-info" style="width: 400px; border-radius: 20px;">
-                    <form  #registerForm="ngForm" >
+                    <form  #registerForm="ngForm" (ngSubmit)="updatePolicy()">
                         <div class="mb-2">
                         <label for="pName"  class="form-label">Policy Name</label>
                         <input #pName="ngModel" type="text" [(ngModel)]="policy.PolicyName"class="form-control"  name="pName"  >
@@ -43,14 +43,14 @@
 
                         <div class="mb-2">
                         <label for="policyType" class="form-label" >PolicyType </label>
-                        <!-- <select class="form-select" [(ngModel)]="policy.PolicyTypeId" name="pt">
+                        <select class="form-select" [(ngModel)]="policy.PolicyTypeId" name="pt">
                                     <option value="">select category</option>
-                                    <option  *ngFor="let pt of objPolicyType.policyTypeList" value={{pt.Id}} >{{pt.Name}}</option>
-                        </select> -->
+                                    <option  *ngFor="let pt of objPolicyType.policyTypeList" [attr.selected]="pt.Id===policy.PolicyType.Id?true:false" value={{pt.Id}} >{{pt.Name}}</option>
+                        </select>
 
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-primary"  type="submit">Register Policy</button>
+                        <button class="btn btn-primary"  type="submit">Update Policy</button>
                         </div>      
                     </form>
                 </div>

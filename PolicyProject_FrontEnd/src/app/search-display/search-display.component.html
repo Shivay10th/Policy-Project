@@ -1,13 +1,13 @@
 <section class="mt-2" style="background-color: #eee; border-radius: 20px;">
 
     <div class="container ">
-        <p class="text-center h1 fw-bold pt-5 mb-5 mx-1 mx-md-4 mt-4">Policies</p>
-        <div class="d-flex justify-content-center " style="height: 100%;">
+        <p class="text-center h1 fw-bold pt-5 mb-5 mx-1 mx-md-4 mt-4" (click)="onclick()">Policies</p>
+        <div   [ngClass]="policyList===undefined?'':'d-flex justify-content-center'" [style.display]="policyList===undefined?'none':''" style="height: 100%;">
             <div class="card text-black" style="border-radius: 25px;">
                 <div class="card-body p-md-5">
                     <div class="row flex-justify-content " >
                         
-                            <div class="col-lg-3 col-md-6 card mx-5 mt-4 " style="width: 18rem;"  *ngFor="let p of objSrv.policyList">
+                            <div class="col-lg-3 col-md-6 card mx-5 mt-4 " style="width: 18rem;"  *ngFor="let p of policyList"> 
                                 <div class="card-header h3 text-center pb-1" >
                                     {{p.PolicyName}}
                                 </div>
@@ -19,12 +19,12 @@
                                     <li class="list-group-item pb-1"><strong>Initial Deposite:</strong><span class="ms-2">{{p.InitialDeposite}}</span></li>
                                     <li class="list-group-item pb-1"><strong>Terms Per Year:</strong><span class="ms-2">{{p.TermsPerYear}}</span></li>
                                     <li class="list-group-item pb-1"><strong>Interest:</strong><span class="ms-2">{{p.Interest}}</span></li>
-                                    <div class="p-2 row" *ngIf="local.jwt!=undefined && local.role==='admin'">
+                                     <div class="p-2 row" *ngIf="local.jwt!=undefined && local.role==='admin'">
                                         <div class="btn btn-danger  m-1" (click)="del(p.PolicyId)"> <i class="fa fs-xl fa-trash " ></i></div>
                                         <div class="btn btn-primary  m-1" routerLink="/policy/update/{{p.PolicyId}}"> <i class="fa-sharp fa-solid fa-pen"></i></div>
-                                    </div>
+                                    </div> 
                                 </ul>
-                            </div>
+                            </div> 
                         
                     </div>
                 </div>
