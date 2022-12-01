@@ -40,9 +40,14 @@
                         <label for="interest" class="form-label">Interest</label>
                         <input #interest="ngModel" type="text"[(ngModel)]="objSrv.policy.Interest" class="form-control" name="interest" >
                         </div>
+
                         <div class="mb-2">
-                        <label for="policyType" class="form-label">PolicyType Id</label>
-                        <input #policyType="ngModel" type="number" [(ngModel)]="objSrv.policy.PolicyTypeId" class="form-control" name="policyType" >
+                        <label for="policyType" class="form-label" >PolicyType </label>
+                        <select class="form-select" [(ngModel)]="objSrv.policy.PolicyTypeId" name="pt">
+                                    <option value="">select category</option>
+                                    <option  *ngFor="let pt of objPolicyType.policyTypeList" value={{pt.Id}} >{{pt.Name}}</option>
+                        </select>
+
                         </div>
                         <div class="d-grid gap-2 col-6 mx-auto">
                         <button class="btn btn-primary"  type="submit">Register Policy</button>

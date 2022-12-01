@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PolicyService } from 'src/app/shared/policy/policy.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { PolicyService } from 'src/app/shared/policy/policy.service';
 })
 export class PolicyDisplayComponent implements OnInit {
 
-  constructor(public objSrv:PolicyService) { }
+  constructor(public objSrv:PolicyService,private route:Router) { }
 
   local:any;
   ngOnInit(): void {
@@ -20,11 +21,14 @@ export class PolicyDisplayComponent implements OnInit {
 
       this.objSrv.del(PolicyId).subscribe(res=>{
         this.objSrv.getPolicyList();
+        console.log(res);
         alert("Passport Record Deleted");
       },err=>{
         alert("Error"+err)
       })
     }
 }
+
+
 
 }

@@ -12,17 +12,32 @@ export class PolicyService {
   policy:Policy;
   policyList:Policy[]
 
-  registerPolicy(){
+  _authHeader(){
     let headers = new HttpHeaders();
-    headers=headers.set("Authorization","Bearer "+localStorage.getItem("jwt"));
-
-    return this.http.post(this.apiUrl,this.policy,{headers:headers})
+    return headers.set("Authorization","Bearer "+localStorage.getItem("jwt"));
   }
+  
+  registerPolicy(){
+
+
+    return this.http.post(this.apiUrl,this.policy,{headers:this._authHeader()})
+  }
+
+  getPolicyById(policyId:number){
+    return this.http.get(this.apiUrl+policyId,{headers:this._authHeader()});
+  }
+  // get List of Policies
+
   getPolicyList(){
     this.http.get(this.apiUrl,{observe:'response'}).toPromise().then(res=>{this.policyList=res.body["Data"] as Policy[]})
   }
-del(PolicyId){
-  return this.http.get(this.apiUrl+PolicyId);
-}
+  // delete a policy by id
+  del(PolicyId){
+    return this.http.delete(this.apiUrl+PolicyId,{headers:this._authHeader()});
+  }
+
+  updatepolicy(PolicyId){
+    return this.http.delete(this.apiUrl+PolicyId,{headers:this._authHeader()});
+  }
 
 }

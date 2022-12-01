@@ -2,6 +2,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PolicyType } from 'src/app/policyType/policy-type.model';
+import { PolicyTypeService } from 'src/app/policyType/policy-type.service';
 import { PolicyService } from 'src/app/shared/policy/policy.service';
 
 @Component({
@@ -11,11 +13,12 @@ import { PolicyService } from 'src/app/shared/policy/policy.service';
 })
 export class PolicyRegComponent implements OnInit {
 
-  constructor(public objSrv:PolicyService,private route:Router) { }
-  
+  constructor(public objSrv:PolicyService,private route:Router,public objPolicyType:PolicyTypeService) { }
   ngOnInit(): void {
     this.resetForm();
+    this.objPolicyType.getPolicyTypes();
   }
+
   resetForm(form?:NgForm,){
     if(form!=null){
       form.form.reset();
@@ -29,7 +32,7 @@ export class PolicyRegComponent implements OnInit {
       this.resetForm(form)
 
         console.log(res);
-        this.route.navigateByUrl('/');
+        this.route.navigateByUrl('/policies');
     },err=>{
       console.log(err);
       
