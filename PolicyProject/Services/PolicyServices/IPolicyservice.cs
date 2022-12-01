@@ -9,7 +9,7 @@ namespace PolicyProject.Services.PolicyServices
     {
         Task<ServiceResponse<ICollection<PolicyDto>>> GetAllPolicies();
         Task<ServiceResponse<PolicyDto>> GetPolicy(int id);
-        Task<ServiceResponse<PolicyDto>> GetPolicy(string PolicyName);
+        Task<ServiceResponse<ICollection<PolicyDto>>> GetPolicy(string PolicyName);
         Task<ServiceResponse<ICollection<PolicyDto>>> DeletePolicy(int id);
         Task<ServiceResponse<PolicyDto>> UpdatePolicy(PolicyDto policy);
         Task<ServiceResponse<PolicyDto>> AddPolicy(PolicyDto Policy);

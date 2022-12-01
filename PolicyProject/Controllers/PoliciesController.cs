@@ -52,10 +52,10 @@ namespace PolicyProject.Controllers
             }
         }
         [AllowAnonymous]
-        [HttpGet("{name}")]
-        public async Task<ActionResult<Policy>> GetPolicy(string name)
+        [HttpGet("search/{name}")]
+        public async Task<ActionResult> GetPolicy(string name)
         {
-            ServiceResponse<PolicyDto> res = await _policyservice.GetPolicy(name);
+            ServiceResponse<ICollection<PolicyDto>> res = await _policyservice.GetPolicy(name);
             if (res.Success)
             {
                 return Ok(res);

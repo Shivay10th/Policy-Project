@@ -85,13 +85,13 @@ namespace PolicyProject.Services.PolicyServices
             return res;
         }
 
-        public async Task<ServiceResponse<PolicyDto>> GetPolicy(string PolicyName)
+        public async Task<ServiceResponse<ICollection<PolicyDto>>> GetPolicy(string PolicyName)
         {
-            ServiceResponse<PolicyDto> res = new ServiceResponse<PolicyDto>();
-            Policy p = await _context.Policy.FirstOrDefaultAsync(p => p.PolicyName.ToLower().Equals(PolicyName.ToLower()));
-            if (p != null)
+            ServiceResponse<ICollection<PolicyDto>> res = new ServiceResponse<ICollection<PolicyDto>>();
+            List<Policy> policyList = await _context.Policy.Where(p=>p.PolicyName.ToLower().Contains(PolicyName.Trim().ToLower())).ToListAsync();
+            if (policyList != null)
             {
-                res.Data = _mapper.Map<PolicyDto>(p);
+                res.Data = (policyList.Select(pl => _mapper.Map<PolicyDto>(pl))).ToList();
 
             }
             else
