@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PolicyRegComponent } from './policy/policy-reg/policy-reg.component';
 import { PolicyDisplayComponent } from './policy/policy-display/policy-display.component';
 import { FooterComponent } from './footer/footer/footer.component';
+import { PolicyUpdateComponent } from './policy/policy-update/policy-update.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FooterComponent } from './footer/footer/footer.component';
     HomeComponent,
     PolicyRegComponent,
     PolicyDisplayComponent,
-    FooterComponent
+    FooterComponent,
+    PolicyUpdateComponent
   ],
   imports: [
     BrowserModule,

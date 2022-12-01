@@ -20,7 +20,7 @@ export class PolicyRegComponent implements OnInit {
     if(form!=null){
       form.form.reset();
     }else{
-      this.objSrv.policy={PolicyName:"",StartDate:"",Duration:"",CompanyName:"",InitialDeposite:"",UserType:"",TermsPerYear:"",TermsAmount:"",Interest:"",PolicyTypeId:""};
+      this.objSrv.policy={PolicyId:0,PolicyName:"",StartDate:"",Duration:"",CompanyName:"",InitialDeposite:"",UserType:"",TermsPerYear:"",TermsAmount:"",Interest:"",PolicyTypeId:""};
     }
   }
 

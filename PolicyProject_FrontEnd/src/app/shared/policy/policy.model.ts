@@ -1,5 +1,5 @@
 export class Policy {
-    
+     PolicyId;
      PolicyName;
      StartDate;
      Duration;
