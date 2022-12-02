@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PolicyTypeService } from 'src/app/policyType/policy-type.service';
+import { PolicyTypeService } from 'src/app/shared/policyType/policy-type.service';
 import { Policy } from 'src/app/shared/policy/policy.model';
 import { PolicyService } from 'src/app/shared/policy/policy.service';
 

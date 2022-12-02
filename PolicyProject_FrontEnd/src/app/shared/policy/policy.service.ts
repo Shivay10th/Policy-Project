@@ -32,7 +32,10 @@ console.log(this.policy.PolicyType=null)
   // get List of Policies
 
   getPolicyList(){
-    this.http.get(this.apiUrl,{observe:'response'}).toPromise().then(res=>{this.policyList=res.body["Data"] as Policy[]})
+    this.http.get(this.apiUrl,{observe:'response'}).toPromise().then(res=>{this.policyList=res.body["Data"] as Policy[];console.log(this.policyList)})
+  }
+  getPolicyLists(){
+    return this.http.get(this.apiUrl);
   }
   // delete a policy by id
   del(PolicyId){

@@ -2,8 +2,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PolicyType } from 'src/app/policyType/policy-type.model';
-import { PolicyTypeService } from 'src/app/policyType/policy-type.service';
+import { PolicyType } from 'src/app/shared/policyType/policy-type.model';
+import { PolicyTypeService } from 'src/app/shared/policyType/policy-type.service';
 import { PolicyService } from 'src/app/shared/policy/policy.service';
 
 @Component({

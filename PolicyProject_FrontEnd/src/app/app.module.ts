@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer/footer.component';
 import { PolicyUpdateComponent } from './policy/policy-update/policy-update.component';
 import { SearchPolicyComponent } from './search-policy/search-policy.component';
 import { SearchDisplayComponent } from './search-display/search-display.component';
+import { MaturityCalcComponent } from './maturity-calc/maturity-calc.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SearchDisplayComponent } from './search-display/search-display.componen
     FooterComponent,
     PolicyUpdateComponent,
     SearchPolicyComponent,
-    SearchDisplayComponent
+    SearchDisplayComponent,
+    MaturityCalcComponent
   ],
   imports: [
     BrowserModule,

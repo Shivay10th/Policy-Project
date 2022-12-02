@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home/home.component';
+import { MaturityCalcComponent } from './maturity-calc/maturity-calc.component';
 import { PolicyDisplayComponent } from './policy/policy-display/policy-display.component';
 import { PolicyRegComponent } from './policy/policy-reg/policy-reg.component';
 import { PolicyUpdateComponent } from './policy/policy-update/policy-update.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:"login",component:UserLoginComponent},
   {path:"policy/register",component:PolicyRegComponent},
   {path:"policy/search",component:SearchPolicyComponent},
+  {path:"policy/maturity_calc",component:MaturityCalcComponent},
   {path:"policies",component:PolicyDisplayComponent},
   {path:"policy/update/:id",component:PolicyUpdateComponent},
 ];
