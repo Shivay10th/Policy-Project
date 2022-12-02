@@ -54,6 +54,20 @@ namespace PolicyProject.Data
                 res.Message = "This Email already exist";
                 return res;
             }
+            double salaryInYrInLac = (user.Salary * 12)/100000;
+            if (salaryInYrInLac <= 5)
+                user.EmployerType = "A";
+            else if (salaryInYrInLac <= 10)
+                user.EmployerType = "B";
+            else if (salaryInYrInLac <= 15)
+                user.EmployerType = "C";
+            else if (salaryInYrInLac<=30)
+                user.EmployerType = "D";
+            else
+                user.EmployerType = "E";
+
+
+
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
