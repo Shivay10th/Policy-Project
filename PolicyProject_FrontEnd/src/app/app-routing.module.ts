@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContactRegComponent } from './contact/contact-reg/contact-reg.component';
 import { HomeComponent } from './home/home/home.component';
 import { MaturityCalcComponent } from './maturity-calc/maturity-calc.component';
 import { PolicyDisplayComponent } from './policy/policy-display/policy-display.component';
@@ -20,6 +21,8 @@ const routes: Routes = [
   {path:"policy/maturity_calc",component:MaturityCalcComponent},
   {path:"policies",component:PolicyDisplayComponent},
   {path:"policy/update/:id",component:PolicyUpdateComponent},
+  {path:"contact",component:ContactRegComponent},
+
 ];
 
 @NgModule({

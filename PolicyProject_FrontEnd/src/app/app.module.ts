@@ -17,6 +17,7 @@ import { PolicyUpdateComponent } from './policy/policy-update/policy-update.comp
 import { SearchPolicyComponent } from './search/search-policy/search-policy.component';
 import { SearchDisplayComponent } from './search/search-display/search-display.component';
 import { MaturityCalcComponent } from './maturity-calc/maturity-calc.component';
+import { ContactRegComponent } from './contact/contact-reg/contact-reg.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MaturityCalcComponent } from './maturity-calc/maturity-calc.component';
     PolicyUpdateComponent,
     SearchPolicyComponent,
     SearchDisplayComponent,
-    MaturityCalcComponent
+    MaturityCalcComponent,
+    ContactRegComponent
   ],
   imports: [
     BrowserModule,

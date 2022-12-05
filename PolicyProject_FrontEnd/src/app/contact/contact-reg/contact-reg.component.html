@@ -1,0 +1,39 @@
+<section class="mt-2" style="background-color: #eee; border-radius: 20px;">
+
+    <div class="container ">
+        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Contact Us</p>
+        <div class="d-flex justify-content-center " style="height: 100%;">  
+            <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+    
+                <div class="p-4 border border-info" style="width: 400px; border-radius: 20px;">
+            <div>
+                        <div class="mb-2">
+                        <label for="Name"  class="form-label">UserName</label>
+                        <input  type="text" [(ngModel)]="contact.UserName" class="form-control"  name=" UserName"  >
+                        </div>
+                        <div class="mb-2">
+                        <label for="sDate" class="form-label">Email</label>
+                        <input  type="text" [(ngModel)]="contact.Email"class="form-control" name="Email" >
+                        </div>
+                        <div class="mb-2">
+                        <label for="duration" class="form-label">Phone Number</label>
+                        <input  type="text" [(ngModel)]="contact.PhoneNumber"class="form-control" name="PhoneNumber" >
+                        </div>
+                        <div class="mb-2">
+                        <label for="duration" class="form-label">PolicyType</label>
+                        <input  type="text" [(ngModel)]="contact.PolicyType"class="form-control" name="PolicyType" >
+                        </div>
+                
+                        <div class="mb-2">
+                        <label for="companyName" class="form-label">Message</label> 
+                        <textarea  type="textarea" [(ngModel)]="contact.Message"class="form-control" name="Message" ></textarea>
+                        </div>
+                     <button class="btn btn-primary"  (click)="save()"  type="submit">Send</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
