@@ -14,8 +14,8 @@ import { PolicyRegComponent } from './policy/policy-reg/policy-reg.component';
 import { PolicyDisplayComponent } from './policy/policy-display/policy-display.component';
 import { FooterComponent } from './footer/footer/footer.component';
 import { PolicyUpdateComponent } from './policy/policy-update/policy-update.component';
-import { SearchPolicyComponent } from './search-policy/search-policy.component';
-import { SearchDisplayComponent } from './search-display/search-display.component';
+import { SearchPolicyComponent } from './search/search-policy/search-policy.component';
+import { SearchDisplayComponent } from './search/search-display/search-display.component';
 import { MaturityCalcComponent } from './maturity-calc/maturity-calc.component';
 
 @NgModule({

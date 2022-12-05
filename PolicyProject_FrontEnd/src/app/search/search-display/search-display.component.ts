@@ -1,6 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { Policy } from '../shared/policy/policy.model';
-import { PolicyService } from '../shared/policy/policy.service';
+import { Policy } from '../../shared/policy/policy.model';
+import { PolicyService } from '../../shared/policy/policy.service';
 
 @Component({
   selector: 'app-search-display',

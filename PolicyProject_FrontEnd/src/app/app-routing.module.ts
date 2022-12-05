@@ -5,7 +5,7 @@ import { MaturityCalcComponent } from './maturity-calc/maturity-calc.component';
 import { PolicyDisplayComponent } from './policy/policy-display/policy-display.component';
 import { PolicyRegComponent } from './policy/policy-reg/policy-reg.component';
 import { PolicyUpdateComponent } from './policy/policy-update/policy-update.component';
-import { SearchPolicyComponent } from './search-policy/search-policy.component';
+import { SearchPolicyComponent } from './search/search-policy/search-policy.component';
 import { UserDisplayComponent } from './user/user-display/user-display.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';

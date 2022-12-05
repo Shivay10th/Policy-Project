@@ -10,9 +10,10 @@ import { UserService } from 'src/app/shared/user/user.service';
 export class UserDisplayComponent implements OnInit {
 
   constructor(public objSrv:UserService) { }
-
+local:any
   ngOnInit(): void {
     this.getProfile();
+    this.local=localStorage; 
   }
 
   userProfile:User

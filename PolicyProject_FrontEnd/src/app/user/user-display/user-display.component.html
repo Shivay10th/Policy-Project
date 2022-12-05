@@ -15,8 +15,8 @@
                     <div class="bg bg-lightblue px-4 "><strong class="mt-2">Salary:</strong><span class="ms-2">{{userProfile.Salary|currency:"INR"}}</span></div><br/>
                     <div class="bg bg-lightblue px-4 "><strong class="mt-2">Pan:</strong><span class="ms-2">{{userProfile.Pan|uppercase}}</span></div><br/>
                     <div class="bg bg-lightblue px-4 "><strong class="mt-2">Emmployer Name:</strong><span class="ms-2">{{userProfile.EmployerName|titlecase}}</span></div><br/>
-                    <div class="row">
-                      <button class="btn btn-success mt-2">Register New Policy</button>
+                    <div class="row"  *ngIf="local.role==='admin'">
+                      <button class="btn btn-success mt-2" routerLink="/policy/register">Register New Policy</button>
                       <button class="btn btn-success mt-2">Edit Categories</button>
                     </div>
                 </div>
