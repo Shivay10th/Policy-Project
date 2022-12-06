@@ -1,0 +1,6 @@
+<div class="row text-center text-white h5 justify-content-md-center ms-4"
+    [ngClass]="status.error?'bg-danger':'bg-success'" [style.display]="status.message==='' ?'none':''"
+    style="border-radius: 5px; width: 350px; padding-top: 8px; --bs-bg-opacity: .6;height: 35px;">
+    <span class="col-md-10">{{status.message}}</span><span class="col-md-2 text-right h4" (click)="clickHandle()"
+        style="font-weight: 600;cursor: pointer;">X</span>
+</div>

@@ -25,17 +25,13 @@ namespace PolicyProject.Data
         {
             ServiceResponse<string> res = new ServiceResponse<string>();
             User user = await _context.User.FirstOrDefaultAsync(u => u.Email == email);
-            if (user == null)
+            if (user == null || !VerifyPassword(password, user.PasswordHash, user.PasswordSalt))
             {
                 res.Success = false;
-                res.Message = "email does not exist";
+                res.Message = "Invalid Email Or Password";
 
             }
-            else if (!VerifyPassword(password, user.PasswordHash, user.PasswordSalt))
-            {
-                res.Success = false;
-                res.Message = "Wrong password";
-            }
+
             else
             {
                 res.Data = CreateJWTToken(user);
@@ -54,14 +50,14 @@ namespace PolicyProject.Data
                 res.Message = "This Email already exist";
                 return res;
             }
-            double salaryInYrInLac = (user.Salary * 12)/100000;
+            double salaryInYrInLac = (user.Salary * 12) / 100000;
             if (salaryInYrInLac <= 5)
                 user.EmployerType = "A";
             else if (salaryInYrInLac <= 10)
                 user.EmployerType = "B";
             else if (salaryInYrInLac <= 15)
                 user.EmployerType = "C";
-            else if (salaryInYrInLac<=30)
+            else if (salaryInYrInLac <= 30)
                 user.EmployerType = "D";
             else
                 user.EmployerType = "E";

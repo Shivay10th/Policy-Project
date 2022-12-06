@@ -18,6 +18,8 @@ import { SearchPolicyComponent } from './search/search-policy/search-policy.comp
 import { SearchDisplayComponent } from './search/search-display/search-display.component';
 import { MaturityCalcComponent } from './maturity-calc/maturity-calc.component';
 import { ContactRegComponent } from './contact/contact-reg/contact-reg.component';
+import { MessageCardComponent } from './shared/message/message-card/message-card.component';
+import { PolicyTypeComponent } from './policy/policy-type/policy-type.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ContactRegComponent } from './contact/contact-reg/contact-reg.component
     SearchPolicyComponent,
     SearchDisplayComponent,
     MaturityCalcComponent,
-    ContactRegComponent
+    ContactRegComponent,
+    MessageCardComponent,
+    PolicyTypeComponent
   ],
   imports: [
     BrowserModule,

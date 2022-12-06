@@ -1,51 +1,57 @@
+<div class="social-links d-none d-md-block mt-2" style="margin-left:0px">
+  <i style="color: red;" class="fa-sharp fa-solid fa-envelope mx-1"></i><a style="color:white; text-decoration: none;"
+    href="mailto:contact@example.com"> hexaware@gmail.com</a>
+  <i style="color: red;" class="fa-sharp fa-solid fa-phone  ms-3"></i> <a style="color:white"> +1 5589 55488 55 </a>
+  <div class="" style="display:inline ; margin-left: 620px;">
 
-  <div class ="social-links d-none d-md-block mt-2" style="margin-left:0px">
-    <i style="color: red;" class="fa-sharp fa-solid fa-envelope mx-1"></i><a style="color:white; text-decoration: none;" href="mailto:contact@example.com">  hexaware@gmail.com</a>
-    <i style="color: red;" class="fa-sharp fa-solid fa-phone  ms-3"></i> <a style="color:white">  +1 5589 55488 55 </a>
- <div class="" style="display:inline ; margin-left: 620px;">
-
-   <a style ="padding:10px; color:white;"  href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
-   <a style="padding: 10px;color:white;" href="#" class="facebook"><i class="fa-brands fa-facebook"></i></a>
-   <a style="padding: 10px;color:white;" href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a>
-   <a style="padding: 10px;color:white;" href="#" class="linkedin"><i class="fa-brands fa-linkedin "></i></a>
- </div>
+    <a style="padding:10px; color:white;" href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
+    <a style="padding: 10px;color:white;" href="#" class="facebook"><i class="fa-brands fa-facebook"></i></a>
+    <a style="padding: 10px;color:white;" href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a style="padding: 10px;color:white;" href="#" class="linkedin"><i class="fa-brands fa-linkedin "></i></a>
   </div>
+</div>
 <nav class="navbar navbar-expand-lg bg-secondary bg-gradient mt-3">
-    <div class="container-fluid ">
-      <a class="navbar-brand text-white" routerLink=" "><i class="fa-brands fa-product-hunt fa-xl"></i>olicyManage</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <div class="container-fluid ">
+    <a class="navbar-brand text-white" routerLink="home"><i class="fa-brands fa-product-hunt fa-xl"></i>olicyManage</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" routerLink="policies">Policies</a>
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" routerLink="policies">Policies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" routerLink="policy/search"><i
+              class="fa-sharp fa-solid fa-magnifying-glass"></i> Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" routerLink="policy/maturity_calc"><i
+              class="fa-sharp fa-solid fa-calculator"></i> Maturity Calc</a>
+        </li>
+      </ul>
+      <div class="d-flex mx-5">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+          <li class="nav-item mx-2 " *ngIf="local.jwt===undefined">
+            <a class="nav-link active text-white" aria-current="page" routerLink="login"><span
+                class="pe-2">Login</span><i class="fa-solid fa-right-to-bracket"></i></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" routerLink="policy/search"><i class="fa-sharp fa-solid fa-magnifying-glass"></i> Search</a>
+          <li class="nav-item mx-2" *ngIf="local.jwt===undefined">
+            <a class="nav-link active text-white" aria-current="page" routerLink="register">Register</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" routerLink="policy/maturity_calc"><i class="fa-sharp fa-solid fa-calculator"></i> Maturity Calc</a>
+          <li class="nav-item mx-2" *ngIf="local.jwt!==undefined">
+            <a class="nav-link active text-white" aria-current="page" routerLink="user/profile"><i
+                class="fa-solid fa-user"></i><span class="ps-1"> Profile</span></a>
           </li>
+          <li class="nav-item mx-2" *ngIf="local.jwt!==undefined">
+            <a class="nav-link active text-white" aria-current="page" routerLink="login" (click)="logOut()"><span
+                class="pe-1"> Logout</span><i class="fa-sharp fa-solid fa-right-from-bracket"></i></a>
+          </li>
+
         </ul>
-        <div class="d-flex mx-5"  >
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
-                <li class="nav-item mx-2 " *ngIf="local.jwt===undefined">
-                  <a class="nav-link active text-white" aria-current="page" routerLink="login"><span class="pe-2">Login</span><i class="fa-solid fa-right-to-bracket"></i></a>
-                </li>
-                <li class="nav-item mx-2" *ngIf="local.jwt===undefined">
-                  <a class="nav-link active text-white" aria-current="page" routerLink="register">Register</a>
-                </li>
-                <li class="nav-item mx-2" *ngIf="local.jwt!==undefined">
-                  <a class="nav-link active text-white" aria-current="page" routerLink="user/profile"><i class="fa-solid fa-user"></i><span class="ps-1">  Profile</span></a>
-                </li>
-                <li class="nav-item mx-2" *ngIf="local.jwt!==undefined" >
-                  <a class="nav-link active text-white" aria-current="page" routerLink="login" (click)="logOut()"><span class="pe-1">  Logout</span><i class="fa-sharp fa-solid fa-right-from-bracket"></i></a>
-                </li>
-
-            </ul>
-            </div>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

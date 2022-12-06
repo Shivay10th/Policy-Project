@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef  } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth/auth.service';
@@ -14,6 +14,7 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetForm();
+    this.status=history.state.status;
   }
 
   resetForm(form?:NgForm){
@@ -23,18 +24,23 @@ export class UserLoginComponent implements OnInit {
       this.objSrv.cred={Email:"",Password:""};
     }
   }
+  status:{message:string,error:boolean}={message:"",error:true};
   login(form:NgForm){
     this.objSrv.login().subscribe(res=>{
+      console.log(res);
       this.resetForm(form)
-      
+      this.status.error=false;
+      this.status.message="Login successful";
       localStorage.setItem("jwt",res["Data"])
       let tokenInfo = JSON.parse(atob(localStorage.jwt.split('.')[1]));
       localStorage.setItem("role",tokenInfo["role"]);
       localStorage.setItem("userId",tokenInfo["nameid"]);
       
-      this.route.navigateByUrl("user/profile");
+      this.route.navigate(["user/profile"],{state:{status:this.status}});
     },err=>{
-      console.log(err);
+      this.status.error=true;
+      this.status.message=err.error["Message"];
+      console.log(err)
       
     }) 
   }

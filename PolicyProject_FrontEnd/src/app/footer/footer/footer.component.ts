@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
-
+  constructor() { 
+    this.local=localStorage.getItem('jwt');
+  }
+local:any;
   ngOnInit(): void {
   }
 

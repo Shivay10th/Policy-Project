@@ -17,7 +17,6 @@ export class AuthService {
 
   login(){
     return this.http.post(this.apiUrl+"login",this.cred);
-    // console.log(data);
     
   }
   register(){

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/shared/user/user.model';
 import { UserService } from 'src/app/shared/user/user.service';
 
@@ -11,8 +12,11 @@ export class UserDisplayComponent implements OnInit {
 
   constructor(public objSrv:UserService) { }
 local:any
+  status:{message:string,error:boolean}={message:"",error:true};
+
   ngOnInit(): void {
     this.getProfile();
+    this.status=history.state.status;
     this.local=localStorage; 
   }
 
@@ -20,7 +24,6 @@ local:any
   getProfile(){
     this.objSrv.getUserById().subscribe(res=>{
       this.userProfile=res as User
-      console.log(this.userProfile);
       
     })
   }

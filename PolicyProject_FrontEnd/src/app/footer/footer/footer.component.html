@@ -1,58 +1,61 @@
-<div class="container position-relative bottom-0" >
-  <hr class="hr-or" >
-          <span class="span-or"></span>
+<div class="container position-relative bottom-0">
+  <hr class="hr-or">
+  <span class="span-or"></span>
   <hr class="hr-or">
   <hr class="hr-or">
   <footer class="nb-footer">
-  <div class="container">
-  <div class="row">
-  <div class="col-sm-12">
-  <div class="about">
-    <img src="images/logo.png" class="img-responsive center-block" alt="">
-    <p>Bootstrap Footer example snippets with CSS, Javascript and HTML. Code example of bootstrap-3 footer using HTML, Javascript, jQuery, and CSS. 5 Beautiful and Responsive Footer Templates. Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS.</p>
-  
-  </div>
-  </div>
-  
-  <div class="col-md-3 col-sm-6">
-  <div class="footer-info-single">
-    <h2 class="title" routerLink="contact">Contact Us</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="about">
+            <img src="images/logo.png" class="img-responsive center-block" alt="">
+            <p>Bootstrap Footer example snippets with CSS, Javascript and HTML. Code example of bootstrap-3 footer using
+              HTML, Javascript, jQuery, and CSS. 5 Beautiful and Responsive Footer Templates. Pin a fixed-height footer
+              to the bottom of the viewport in desktop browsers with this custom HTML and CSS.</p>
 
-  </div>
-  </div>
-  
-  <div class="col-md-3 col-sm-6">
-  <div class="footer-info-single">
-    <h2 class="title">About Us</h2>
+          </div>
+        </div>
 
-  </div>
-  </div>
-  
-  <div class="col-md-3 col-sm-6">
-  <div class="footer-info-single">
-    <h2 class="title">Policies</h2>
+        <div class="col-md-3 col-sm-6">
+          <div class="footer-info-single">
+            <h2 class="title" routerLink="contact" style="cursor: pointer;">Contact Us</h2>
 
-  </div>
-  </div>
-  
-  <div class="col-md-3 col-sm-6">
-  <div class="footer-info-single">
-    <h2 class="title">Profile</h2>
-    
-  </div>
-  </div>
-  </div>
-  </div>
-  
-  <section class="copyright">
-  <div class="container">
-  <div class="row">
-  <div class="col-sm-12">
-  <p class="text-center">Copyright © 2022. Team 1.</p>
-  </div>
-  <div class="col-sm-6"></div>
-  </div>
-  </div>
-  </section>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" style="cursor: pointer;">
+          <div class="footer-info-single">
+            <h2 class="title">About Us</h2>
+
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" routerLink="policies" style="cursor: pointer;">
+          <div class="footer-info-single">
+            <h2 class="title">Policies</h2>
+
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" [routerLink]="local !=undefined?['user/profile']:['login']"
+          style="cursor: pointer;">
+          <div class="footer-info-single">
+            <h2 class="title">Profile</h2>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <p class="text-center">Copyright © 2022. Team 1.</p>
+          </div>
+          <div class="col-sm-6"></div>
+        </div>
+      </div>
+    </section>
   </footer>
 </div>
