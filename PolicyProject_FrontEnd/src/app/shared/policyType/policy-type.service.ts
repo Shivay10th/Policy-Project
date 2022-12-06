@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { PolicyType } from './policy-type.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PolicyTypeService {
-
+  Host = environment.host;
   constructor(private http:HttpClient) { }
-  readonly apiUrl ="http://localhost:2459/api/policy/category/";
+  readonly apiUrl =`${this.Host}/policy/category/`;
   policyTypeList:PolicyType[]
   getPolicyTypes(){
 

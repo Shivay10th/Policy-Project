@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Policy } from './policy.model';
 
 @Injectable({
@@ -8,7 +9,9 @@ import { Policy } from './policy.model';
 export class PolicyService {
 
   constructor(private http:HttpClient) { }
-  readonly apiUrl="http://localhost:2459/api/policies/";
+  Host = environment.host;
+
+  readonly apiUrl=`${this.Host}/policies/`;
   policy:Policy;
   policyList:Policy[]
 

@@ -55,6 +55,7 @@ namespace PolicyProject.Controllers
             return BadRequest(res);
 
         }
+        [HttpPut]
         public async Task<IActionResult> UpdatePolicyTypeBy(PolicyTypeDto updatedPolicyType)
         {
             ServiceResponse<PolicyTypeDto> res = await _policyTypeService.UpdatePolicyType(updatedPolicyType);
