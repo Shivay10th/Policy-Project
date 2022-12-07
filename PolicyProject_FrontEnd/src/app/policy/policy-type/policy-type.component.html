@@ -1,32 +1,32 @@
 <section class="mt-2" style="background-color: #eee; border-radius: 20px;">
 
     <div class="container ">
-        <p class="text-center h1 fw-bold pt-5 mb-5 mx-1 mx-md-4 mt-4">Policies</p>
+        <p class="text-center h1 fw-bold pt-5 mb-5 mx-1 mx-md-4 mt-4">Policy Categories</p>
         <div class="d-flex justify-content-center " style="height: 100%;">
             <div class="card text-black" style="border-radius: 25px;">
                 <div class="card-body p-md-5">
                     <div class="row flex-justify-content ">
-                        <form #policyTypeForm="ngForm" (ngSubmit)="registerPolicyType(policyTypeForm)">
-                            <div class="mb-2">
-                                <label for="ptName" class="form-label">Enter new Category Name</label>
-                                <div class="addC">
+                        <div class="mb-2">
+                            <label for="ptName" class="form-label">Enter new Category Name</label>
+                            <div class="addC">
 
-                                    <input #ptName="ngModel" type="text" [(ngModel)]="policyType.Name"
-                                        class="form-control col-md-10" name="ptName">
-                                    <i class="btn btn-primary col-md-2 fa-sharp fa-solid fa-plus"></i>
-                                </div>
+                                <input #ptName="ngModel" type="text" [(ngModel)]="policyType.Name"
+                                    class="form-control col-md-10" name="ptName">
+                                <i class="btn btn-primary col-md-2 fa-sharp fa-solid fa-plus fa-xl pt-3"
+                                    (click)="registerPolicyType(policyType)"></i>
                             </div>
-                        </form>
-                        <div class="list-group list-group-light" *ngFor="let pt of objPolicyType.policyTypeList">
-                            <div class="list-group-item list-group-item-action px-3 border-0 rounded-3 mb-2">
+                        </div>
+                        <div class="list-group list-group-light text-center"
+                            *ngFor="let pt of objPolicyType.policyTypeList">
+                            <span class="list-group-item list-group-item-action px-3 border-0 rounded-3 ">
                                 {{pt.Name}}
-                                <div class="p-2 row" *ngIf="local.jwt!=undefined && local.role==='admin'">
-                                    <div class="btn   m-1" (click)="del(pt.Id)"> <i class="fa fs-xs fa-trash "></i>
-                                    </div>
+                                <span class="" *ngIf="local.jwt!=undefined && local.role==='admin'">
+                                    <span class="btn   m-1" (click)="del(pt.Id)"> <i class="fa fs-xs fa-trash "></i>
+                                    </span>
                                     <!-- <div class="btn btn-primary  m-1" routerLink="/policy/update/{{p.PolicyId}}"> <i
                                             class="fa-sharp fa-solid fa-pen"></i></div> -->
-                                </div>
-                            </div>
+                                </span>
+                            </span>
 
                         </div>
                     </div>

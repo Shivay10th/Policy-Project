@@ -19,10 +19,27 @@ policyType:PolicyType={Name:"",Id:""};
 
 
   }
-del(id){
 
+  refresh(): void {
+    window.location.reload();
 }
-registerPolicyType(form:NgForm){
 
+del(id){
+this.objPolicyType.deletePolicyType(id).subscribe(res=>{
+  console.log(res);
+  this.refresh();
+},err=>{
+  console.log(err);
+})
+}
+registerPolicyType(policyType:PolicyType){
+
+  this.policyType.Id=0;
+this.objPolicyType.postPolicyType(policyType).subscribe(res=>{
+  console.log(res);
+  this.refresh();
+},err=>{
+  console.log(err);
+});
 }
 }
