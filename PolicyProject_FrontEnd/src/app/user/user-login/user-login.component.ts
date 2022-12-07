@@ -2,19 +2,25 @@ import { Component, OnInit,ChangeDetectorRef  } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth/auth.service';
+import { Status } from 'src/app/shared/message/status.model';
 
 @Component({
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.css']
 })
+
 export class UserLoginComponent implements OnInit {
 
-  constructor(public objSrv:AuthService,private route:Router) { }
+  constructor(public objSrv:AuthService,private route:Router) {
+    this.status= new Status();
+    console.log(this.status)
+   }
 
   ngOnInit(): void {
+
     this.resetForm();
-    this.status=history.state.status;
+    this.status=history.state.status!== undefined? history.state.status as Status :new Status();
   }
 
   resetForm(form?:NgForm){
@@ -24,7 +30,7 @@ export class UserLoginComponent implements OnInit {
       this.objSrv.cred={Email:"",Password:""};
     }
   }
-  status:{message:string,error:boolean}={message:"",error:true};
+  status:Status;;
   login(form:NgForm){
     this.objSrv.login().subscribe(res=>{
       console.log(res);
@@ -38,6 +44,8 @@ export class UserLoginComponent implements OnInit {
       
       this.route.navigate(["user/profile"],{state:{status:this.status}});
     },err=>{
+      console.log(this.status);
+      console.log(typeof this.status)
       this.status.error=true;
       this.status.message=err.error["Message"];
       console.log(err)

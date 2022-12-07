@@ -10,7 +10,6 @@ export class MessageCardComponent implements OnInit {
   constructor() { }
   @Input() status:{message:string,error:boolean}={message:"",error:true}
   
-
   clickHandle(){
     this.status.message='';
   }
