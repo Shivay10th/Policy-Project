@@ -20,6 +20,7 @@ import { MaturityCalcComponent } from './maturity-calc/maturity-calc.component';
 import { ContactRegComponent } from './contact/contact-reg/contact-reg.component';
 import { MessageCardComponent } from './shared/message/message-card/message-card.component';
 import { PolicyTypeComponent } from './policy/policy-type/policy-type.component';
+import { PolicyCardComponent } from './shared/policy/policy-card/policy-card.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PolicyTypeComponent } from './policy/policy-type/policy-type.component'
     MaturityCalcComponent,
     ContactRegComponent,
     MessageCardComponent,
-    PolicyTypeComponent
+    PolicyTypeComponent,
+    PolicyCardComponent
   ],
   imports: [
     BrowserModule,
