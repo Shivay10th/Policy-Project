@@ -21,6 +21,7 @@ import { ContactRegComponent } from './contact/contact-reg/contact-reg.component
 import { MessageCardComponent } from './shared/message/message-card/message-card.component';
 import { PolicyTypeComponent } from './policy/policy-type/policy-type.component';
 import { PolicyCardComponent } from './shared/policy/policy-card/policy-card.component';
+import { ContactDisplayComponent } from './contact/contact-display/contact-display.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PolicyCardComponent } from './shared/policy/policy-card/policy-card.com
     ContactRegComponent,
     MessageCardComponent,
     PolicyTypeComponent,
-    PolicyCardComponent
+    PolicyCardComponent,
+    ContactDisplayComponent
   ],
   imports: [
     BrowserModule,

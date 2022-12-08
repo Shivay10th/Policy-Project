@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Contact } from 'src/app/shared/contact/contact.model';
 import { ContactService } from 'src/app/shared/contact/contact.service';
 
 @Component({
@@ -9,15 +10,17 @@ import { ContactService } from 'src/app/shared/contact/contact.service';
 export class ContactRegComponent implements OnInit {
 
 
-  constructor(private objsrv:ContactService ) { }
-contact={PolicyId:0,UserName:"",Email:"",PhoneNumber:"",PolicyType:"",Message:"", }
+  contact:Contact={Email:"",PhoneNumber:"",PolicyId:"",Message:""}
+  constructor(private objsrv:ContactService ) {
+
+   }
 
   ngOnInit(): void {
   }
 
   save()
   {
-    if(this.contact.UserName=="" || this.contact.Email=="" || this.contact.PhoneNumber=="" || this.contact.PhoneNumber=="" || this.contact.Message=="")
+    if(  this.contact.Email=="" || this.contact.PhoneNumber=="" || this.contact.Message=="")
     {
       alert("Please fill all the details")
       return false;
