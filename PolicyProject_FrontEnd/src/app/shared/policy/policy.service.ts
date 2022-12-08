@@ -15,22 +15,18 @@ export class PolicyService {
   policy:Policy;
   policyList:Policy[]
 
-  _authHeader(){
-    let headers = new HttpHeaders();
-    return headers.set("Authorization","Bearer "+localStorage.getItem("jwt"));
-  }
   
   registerPolicy(){
 console.log(this.policy.PolicyType=null)
 
-    return this.http.post(this.apiUrl,this.policy,{headers:this._authHeader()})
+    return this.http.post(this.apiUrl,this.policy)
   }
 
   getPolicyById(policyId:number){
-    return this.http.get(this.apiUrl+policyId,{headers:this._authHeader()});
+    return this.http.get(this.apiUrl+policyId);
   }
   getPolicyByName(policyName:string){
-    return this.http.get(this.apiUrl+"search/"+policyName,{headers:this._authHeader()});
+    return this.http.get(this.apiUrl+"search/"+policyName);
   }
   // get List of Policies
 
@@ -42,12 +38,12 @@ console.log(this.policy.PolicyType=null)
   }
   // delete a policy by id
   del(PolicyId){
-    return this.http.delete(this.apiUrl+PolicyId,{headers:this._authHeader()});
+    return this.http.delete(this.apiUrl+PolicyId);
   }
 
   updatepolicy(PolicyId,policy){
     policy.policyType=null;
-    return this.http.put(this.apiUrl+PolicyId,policy,{headers:this._authHeader()},);
+    return this.http.put(this.apiUrl+PolicyId,policy);
   }
 
 }

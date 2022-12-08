@@ -13,9 +13,6 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   getUserById(){
-    
-    let headers = new HttpHeaders();
-    headers=headers.set("Authorization","Bearer "+localStorage.getItem("jwt"));
-    return this.http.get(this.apiUrl+localStorage.getItem("userId"),{headers:headers});
+    return this.http.get(this.apiUrl+localStorage.getItem("userId"));
   }
 }

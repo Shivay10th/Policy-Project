@@ -6,7 +6,7 @@
             <div class="card text-black" style="border-radius: 25px;">
                 <div class="card-body p-md-5">
                     <div class="row flex-justify-content ">
-                        <div class="mb-2">
+                        <div class="mb-2" *ngIf="local.jwt!=undefined && local.role==='admin'">
                             <label for="ptName" class="form-label">Enter new Category Name</label>
                             <div class="addC">
 

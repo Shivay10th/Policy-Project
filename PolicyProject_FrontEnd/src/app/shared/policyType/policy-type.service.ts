@@ -12,18 +12,16 @@ export class PolicyTypeService {
   readonly apiUrl =`${this.Host}/policy/category/`;
   policyTypeList:PolicyType[]
 
-    _authHeader(){
-    let headers = new HttpHeaders();
-    return headers.set("Authorization","Bearer "+localStorage.getItem("jwt"));
-  }
+   
+  
   getPolicyTypes(){
 
     this.http.get(this.apiUrl,{observe:'response'}).toPromise().then(res=>{this.policyTypeList=res.body["Data"] as PolicyType[]})
   }
   postPolicyType(policyType:PolicyType){
-    return this.http.post(this.apiUrl,policyType,{headers:this._authHeader()})
+    return this.http.post(this.apiUrl,policyType)
   }
   deletePolicyType(id){
-    return this.http.delete(this.apiUrl+id,{headers:this._authHeader()});
+    return this.http.delete(this.apiUrl+id);
   }
 }
