@@ -11,4 +11,5 @@ export class Policy {
      Interest;
      PolicyTypeId;
      PolicyType;
+     
 }

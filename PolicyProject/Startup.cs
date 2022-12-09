@@ -11,6 +11,7 @@ using Newtonsoft.Json.Serialization;
 using PolicyProject.Data;
 using PolicyProject.Services.PolicyServices;
 using PolicyProject.Services.PolicyTypeServices;
+using Serilog;
 
 namespace PolicyProject
 {
@@ -101,6 +102,7 @@ namespace PolicyProject
 
 
             app.UseRouting();
+            app.UseSerilogRequestLogging();
             //Authentication should be above authorization
             app.UseAuthentication();
 

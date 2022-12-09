@@ -27,7 +27,7 @@ namespace PolicyProject.Controllers
                 DOB = request.DOB,
                 ContactNo = request.ContactNo,
                 Email = request.Email,
-                Role=request.Role,
+                Role = request.Role,
                 Salary = request.Salary,
                 Pan = request.Pan,
                 EmployerType = request.EmployerType,

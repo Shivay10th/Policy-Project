@@ -12,6 +12,7 @@
     <li class="list-group-item pb-1"><strong>Terms Per Year:</strong><span class="ms-2">{{p.TermsPerYear}}</span>
     </li>
     <li class="list-group-item pb-1"><strong>Interest:</strong><span class="ms-2">{{p.Interest}}</span></li>
+    <li class="list-group-item pb-1"><strong>For User Type:</strong><span class="ms-2">{{p.UserType}}</span></li>
     <!-- <li class="list-group-item pb-1"><strong>Interest:</strong><span class="ms-2">{{p.PolicyType.Name}}</span></li> -->
     <div class="p-2 row" *ngIf="local.jwt!=undefined && local.role==='admin'">
         <div class="btn btn-danger  m-1" (click)="del(p.PolicyId)"> <i class="fa fs-xl fa-trash "></i></div>

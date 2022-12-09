@@ -9,7 +9,7 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { NavComponent } from './navigation/nav/nav.component';
 import { HomeComponent } from './home/home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, NG_VALIDATORS, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PolicyRegComponent } from './policy/policy-reg/policy-reg.component';
 import { PolicyDisplayComponent } from './policy/policy-display/policy-display.component';
@@ -24,6 +24,8 @@ import { PolicyTypeComponent } from './policy/policy-type/policy-type.component'
 import { PolicyCardComponent } from './shared/policy/policy-card/policy-card.component';
 import { ContactDisplayComponent } from './contact/contact-display/contact-display.component';
 import { JwtInterceptorSrvService } from './shared/auth/jwt-interceptor-srv.service';
+import { MinvalDirective } from './shared/directives/formvalidation/minval.directive';
+import { MaxvalDirective } from './shared/directives/formvalidation/maxval.directive';
 
 
 @NgModule({
@@ -45,12 +47,16 @@ import { JwtInterceptorSrvService } from './shared/auth/jwt-interceptor-srv.serv
     MessageCardComponent,
     PolicyTypeComponent,
     PolicyCardComponent,
-    ContactDisplayComponent
+    ContactDisplayComponent,
+    MinvalDirective,
+    MinvalDirective,
+    MaxvalDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
 
 

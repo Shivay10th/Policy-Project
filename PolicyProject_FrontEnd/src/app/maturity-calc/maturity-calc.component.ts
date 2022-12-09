@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Policy } from '../shared/policy/policy.model';
 import { PolicyService } from '../shared/policy/policy.service';
 
@@ -12,7 +13,7 @@ export class MaturityCalcComponent implements OnInit {
   constructor(public policyService:PolicyService) { }
 
   policyList:Policy[]
-  selectedPolicy :Policy
+  selectedPolicy :Policy = new Policy();
 
   startDate:Date;
   durationInYr:number;
@@ -33,6 +34,10 @@ export class MaturityCalcComponent implements OnInit {
     });
   }
   
+maturityForm= new FormGroup({
+  
+});
+
   calcMaturityAmount(){
     this.maturityAmount = this.intitalDepo  + 2*(this.durationInYr+this.termsPerYr+this.termAmount) * (this.selectedPolicy.Interest/100);
     let sdate = new Date(this.startDate);

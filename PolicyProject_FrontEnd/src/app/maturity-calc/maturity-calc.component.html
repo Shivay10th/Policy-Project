@@ -5,55 +5,95 @@
         <div class="d-flex justify-content-center " style="height: 100%;">
             <div class="card text-black" style="border-radius: 25px;">
                 <div class="card-body p-md-5">
-    
-                <div class="p-4 border border-info" style="width: 400px; border-radius: 20px;">
-                    <form  #registerForm="ngForm" >
-                        <div class="mb-2">
-                            <label for="policyType" class="form-label" >Policy Name </label>
-                            <select class="form-select"name="pt"   [(ngModel)]="id" (change)="changeHandle()">
-                                        <option value="">select category</option>
-                                        <option  *ngFor="let p of policyList" value={{p.PolicyId}} >{{p.PolicyName}}</option>
-                            </select>
-    
+
+                    <div class="p-4 border border-info" style="width: 400px; border-radius: 20px;">
+                        <form #registerForm="ngForm">
+                            <div class="mb-2">
+                                <label for="policyType" class="form-label">Policy Name </label>
+                                <select class="form-select" name="pt" [(ngModel)]="id" (change)="changeHandle()">
+                                    <option value="">select category</option>
+                                    <option *ngFor="let p of policyList" value={{p.PolicyId}}>{{p.PolicyName}}</option>
+                                </select>
+
                             </div>
 
-                        <div class="mb-2">
-                        <label for="sDate" class="form-label">Start Date</label>
-                        <input #sDate="ngModel" type="Date" [(ngModel)]="startDate"class="form-control" name="sDate" >
-                        </div>
-                        <div class="mb-2">
-                        <label for="duration" class="form-label">Duration</label>
-                        <input #duration="ngModel" type="number" [(ngModel)]="durationInYr"class="form-control" name="duration" >
-                        </div>
+                            <div class="mb-2">
+                                <label for="sDate" class="form-label">Start Date</label>
+                                <input required #sDate="ngModel" type="Date" [(ngModel)]="startDate"
+                                    class="form-control" name="sDate">
+                            </div>
+                            <div class="mb-2">
+                                <label for="duration" class="form-label">Duration</label>
+                                <input required #duration="ngModel" type="number"
+                                    appMinval="{{selectedPolicy.Duration}}" appMaxval="90" [(ngModel)]="durationInYr"
+                                    placeholder=">={{selectedPolicy.Duration}}" class="form-control" name="duration">
+                                <span *ngIf="!duration.valid && (duration.dirty||duration.touched)">
 
-                        <div class="mb-2">
-                        <label for="initialDepo" class="form-label">Initial Deposite</label>
-                        <input #initialDepo="ngModel" type="number" [(ngModel)]="intitalDepo"class="form-control" name="initialDepo" >
-                        </div>
-                        <div class="mb-2">
-                        <label for="tPerYr" class="form-label">Terms Per Year</label>
-                        <input #tPerYr="ngModel" type="number" [(ngModel)]="termsPerYr"class="form-control" name="tPerYr" >
-                        </div>
-                        <div class="mb-2">
-                        <label for="tAmount" class="form-label">Term Amount</label>
-                        <input #tAmount="ngModel" type="number" [(ngModel)]="termAmount"class="form-control" name="tAmount" >
-                        </div>
+                                    <span class="text-danger" *ngIf="duration.errors.minVal">Minimum
+                                        Duration can be:
+                                        {{selectedPolicy.Duration}} yr</span>
+                                    <span class="text-danger" *ngIf="duration.errors.maxVal">Maxmimum
+                                        Duration can be: 90 yr
+                                    </span>
+                                </span>
+
+                            </div>
+
+                            <div class="mb-2">
+                                <label for="initialDepo" class="form-label">Initial Deposite</label>
+                                <input required #initialDepo="ngModel" type="number"
+                                    appMinval="{{selectedPolicy.InitialDeposite}}" [(ngModel)]="intitalDepo"
+                                    class="form-control" name="initialDepo">
+                                <span *ngIf="!initialDepo.valid && (initialDepo.dirty||initialDepo.touched)">
+                                    <span class="text-danger" *ngIf="initialDepo.errors.minVal">Please
+                                        enter
+                                        value>={{selectedPolicy.InitialDeposite}}</span>
+                                </span>
+                            </div>
+                            <div class="mb-2">
+                                <label for="tPerYr" class="form-label">Terms Per Year</label>
+                                <input required #tPerYr="ngModel" type="number"
+                                    appMaxval="{{selectedPolicy.TermsPerYear}}" [(ngModel)]="termsPerYr"
+                                    class="form-control" name="tPerYr">
+                                <span *ngIf="!tPerYr.valid && (tPerYr.dirty||tPerYr.touched)">
+                                    <span class="text-danger" *ngIf="tPerYr.errors.maxVal">Max Term Per
+                                        Year Can Be:
+                                        {{selectedPolicy.TermsPerYear}}
+                                    </span>
+                                </span>
+
+                            </div>
+                            <div class="mb-2">
+                                <label for="tAmount" class="form-label">Term Amount</label>
+                                <input required #tAmount="ngModel" type="number"
+                                    appMinval="{{selectedPolicy.TermsAmount}}" [(ngModel)]="termAmount"
+                                    class="form-control" name="tAmount">
+                                <span *ngIf="!tAmount.valid&&(tAmount.dirty||tAmount.touched)">
+                                    <span *ngIf="tAmount.errors.minVal">Minimun Term
+                                        Amount Can
+                                        Be:{{selectedPolicy.TermsAmount}}</span>
+                                </span>
+                            </div>
 
 
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-primary"  (click)="calcMaturityAmount()">Calculate Maturity</button>
-                        </div>      
-                    </form>
-                </div>
-                <div class="card pt-2 mt-2" style="border-radius: 20px;">
-                    <div class="card-body">
-
-                        <Strong> Maturity:</Strong><span class="ms-2">{{maturityAmount|currency:"INR"}} </span><br>
-                    <Strong>End Date:</Strong><span class="ms-2">{{endDate|date:"longDate"}}</span>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button class="btn btn-primary" [disabled]="registerForm.invalid"
+                                    (click)="calcMaturityAmount()">Calculate
+                                    Maturity</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
+                    <div class="card pt-2 mt-2" style="border-radius: 20px;">
+                        <div class="card-body">
+
+                            <Strong> Maturity:</Strong><span class="text-danger"
+                                class="ms-2">{{maturityAmount|currency:"INR"}} </span><br>
+                            <Strong>End Date:</Strong><span class="text-danger"
+                                class="ms-2">{{endDate|date:"longDate"}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </section>
+</section>
