@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Policy } from '../shared/policy/policy.model';
 import { PolicyService } from '../shared/policy/policy.service';
 import { PolicyRequest } from '../shared/UserPolicyRequest/policy-request.model';
@@ -12,7 +13,7 @@ import { PolicyRequestService } from '../shared/UserPolicyRequest/policy-request
 })
 export class MaturityCalcComponent implements OnInit {
 
-  constructor(public policyService:PolicyService,private policyRequestSrv:PolicyRequestService) { }
+  constructor(public policyService:PolicyService,private policyRequestSrv:PolicyRequestService,private router :Router) { }
 
   policyList:Policy[]
   selectedPolicy :Policy = new Policy();
@@ -60,8 +61,9 @@ export class MaturityCalcComponent implements OnInit {
   buyPolicy(){
     if(confirm('Do u Want to Buy this Policy')){
       this.policyRequestSrv.requestAPolicy(this.policyRequest).subscribe(res=>{
-        
+        alert("Policy Bought!!")
         console.log(res);
+        this.router.navigate(["/user/policy/all"])
         
       });
     }

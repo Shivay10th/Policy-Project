@@ -30,7 +30,7 @@
                                 <li class="list-group-item pb-1"><strong>Interest:</strong><span
                                         class="ms-2">{{p.Policy.Interest}}</span></li>
                                 <li class="list-group-item pb-1"
-                                    [ngClass]="p.Status==='pending'?'text-danger':'text-success'">
+                                    [ngClass]="p.Status==='pending'?'text-warning':p.Status==='rejected'?'text-danger':'text-success'">
                                     <strong>Request Status:</strong><span class="ms-2">{{p.Status|uppercase}}</span>
                                 </li>
 

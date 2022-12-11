@@ -19,8 +19,13 @@
                     <i class="fas fa-envelope fa-xl me-3 fa-fw text-danger mb-4"></i>
                     <div class="form-outline flex-fill mb-0">
                       <input type="email" id="email" #email="ngModel" name="email" class="form-control"
-                        [(ngModel)]="objSrv.cred.Email" required />
+                        [(ngModel)]="objSrv.cred.Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
                       <label class="form-label" for="email">Your Email</label>
+                      <span class="mt-1" *ngIf="!email.valid&&(email.touched||email.dirty)">
+                        <p class="text-danger" *ngIf="email.errors?.required">*email is Required!!!</p>
+                        <p class="text-danger" *ngIf="email.errors?.pattern">*Please Enter valid
+                          email!!!</p>
+                      </span>
                     </div>
                   </div>
 

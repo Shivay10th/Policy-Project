@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/shared/contact/contact.model';
 import { ContactService } from 'src/app/shared/contact/contact.service';
+import { Policy } from 'src/app/shared/policy/policy.model';
+import { PolicyService } from 'src/app/shared/policy/policy.service';
 
 @Component({
   selector: 'app-contact-reg',
@@ -11,11 +13,16 @@ export class ContactRegComponent implements OnInit {
 
 
   contact:Contact={Email:"",PhoneNumber:"",PolicyId:"",Message:""}
-  constructor(private objsrv:ContactService ) {
+  constructor(private objsrv:ContactService,private policySrv:PolicyService ) {
 
    }
 
+   policyList:Policy[]
+
   ngOnInit(): void {
+    this.policySrv.getPolicyList().subscribe(res=>{
+      this.policyList=res["Data"];
+    },err=>console.log(err));
   }
 
   save()

@@ -44,19 +44,19 @@
                                 <li class="list-group-item pb-1"><strong>Interest:</strong><span
                                         class="ms-2">{{p.Policy.Interest}}</span></li>
                                 <li class="list-group-item pb-1"
-                                    [ngClass]="p.Status==='pending'?'text-danger':'text-success'">
+                                    [ngClass]="p.Status==='pending'?'text-warning':p.Status==='rejected'?'text-danger':'text-success'">
                                     <strong>Request Status:</strong><span class="ms-2">{{p.Status|uppercase}}</span>
                                 </li>
 
                                 <div class="p-2 row" *ngIf="local.jwt!=undefined && local.role==='admin'">
-                                    <select name="" id="" [(ngModel)]="option" (change)="handleOnChange()">
+                                    <select name="" id="" [(ngModel)]="p.Option" (change)="handleOnChange()">
                                         <option value="" class="text-center">
                                             -------------Select-------------</option>
                                         <option value="accepted">Accept</option>
                                         <option value="rejected">Reject</option>
                                     </select>
                                     <div class="btn btn-primary  m-1"
-                                        (click)="updatePolicyDetailStatus(p.PolicyDetailId)"><i
+                                        (click)="updatePolicyDetailStatus(p.PolicyDetailId,p.Option)"><i
                                             class="fa-sharp fa-solid fa-diagram-next"></i>
                                     </div>
                                 </div>

@@ -8,26 +8,28 @@
                     <div class="row flex-justify-content ">
                         <div class="mb-2" *ngIf="local.jwt!=undefined && local.role==='admin'">
                             <label for="ptName" class="form-label">Enter new Category Name</label>
-                            <div class="addC">
 
-                                <input #ptName="ngModel" type="text" [(ngModel)]="policyType.Name"
-                                    class="form-control col-md-10" name="ptName">
-                                <i class="btn btn-primary col-md-2 fa-sharp fa-solid fa-plus fa-xl pt-3"
-                                    (click)="registerPolicyType(policyType)"></i>
-                            </div>
+                            <input #ptName="ngModel" type="text" [(ngModel)]="policyType.Name" class="form-control "
+                                name="ptName">
+                            <button class="btn btn-success mx-auto" (click)="registerPolicyType(policyType)">Add
+                                Category</button>
+
                         </div>
-                        <div class="list-group list-group-light text-center"
-                            *ngFor="let pt of objPolicyType.policyTypeList">
-                            <span class="list-group-item list-group-item-action px-3 border-0 rounded-3 ">
-                                {{pt.Name}}
-                                <span class="" *ngIf="local.jwt!=undefined && local.role==='admin'">
-                                    <span class="btn   m-1" (click)="del(pt.Id)"> <i class="fa fs-xs fa-trash "></i>
-                                    </span>
-                                    <!-- <div class="btn btn-primary  m-1" routerLink="/policy/update/{{p.PolicyId}}"> <i
-                                            class="fa-sharp fa-solid fa-pen"></i></div> -->
-                                </span>
-                            </span>
+                        <div class="row">
 
+                            <div class="col-lg-3 col-md-2" *ngFor="let pt of objPolicyType.policyTypeList">
+                                <div>
+                                    <span class=" border-0 rounded-3  mt-1">
+                                        {{pt.Name}}
+                                        <span *ngIf="local.jwt!=undefined && local.role==='admin'">
+                                            <span class="btn  m-1" (click)="del(pt.Id)"> <i
+                                                    class="fa fs-xs fa-trash "></i>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

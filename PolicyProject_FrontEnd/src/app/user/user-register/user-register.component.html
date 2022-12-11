@@ -1,56 +1,95 @@
 <section class=" mt-2" style="background-color: #eee; border-radius: 20px;">
 
-<div class="container ">
-    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register</p>
-    <div class="d-flex justify-content-center " >
-        <div class="card text-black" style="border-radius: 25px;">
-            <div class="card-body p-md-5">
+    <div class="container ">
+        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Register</p>
+        <div class="d-flex justify-content-center ">
+            <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
 
-            <div class="p-4 border border-info" style="width: 400px; border-radius: 20px;">
-                <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
-                    <div class="mb-2">
-                    <label for="fname"  class="form-label">First Name</label>
-                    <input #firstname="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.FirstName" name="firstName"  >
+                    <div class="p-4 border border-info" style="width: 400px; border-radius: 20px;">
+                        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+                            <div class="mb-2">
+                                <label for="fname" class="form-label">First Name</label>
+                                <input #firstname="ngModel" type="text" class="form-control"
+                                    [(ngModel)]="objSrv.regcred.FirstName" name="firstName" required>
+                                <span class="mt-1" *ngIf="!firstname.valid&&(firstname.touched||firstname.dirty)">
+                                    <p class="text-danger" *ngIf="firstname.errors?.required">*First Name is
+                                        Required!!!</p>
+                                </span>
+                            </div>
+                            <div class="mb-2">
+                                <label for="lname" class="form-label">Last Name</label>
+                                <input #lastname="ngModel" type="text" class="form-control"
+                                    [(ngModel)]="objSrv.regcred.LastName" name="lname">
+                            </div>
+                            <div class="mb-2">
+                                <label for="dob" class="form-label">Date Of Birth</label>
+                                <input #dob="ngModel" type="date" class="form-control" [(ngModel)]="objSrv.regcred.DOB"
+                                    name="dob">
+                            </div>
+                            <div class="mb-2">
+                                <label for="contact" class="form-label">Contact</label>
+                                <input #contactno="ngModel" type="text" class="form-control"
+                                    [(ngModel)]="objSrv.regcred.ContactNo" name="contact" required
+                                    pattern="[789][0-9]{9}">
+                                <span class="mt-1" *ngIf="!contactno.valid&&(contactno.touched||contactno.dirty)">
+                                    <p class="text-danger" *ngIf="contactno.errors?.required">*Contact Detail is
+                                        Required!!!</p>
+                                    <p class="text-danger" *ngIf="contactno.errors?.pattern">*Please Enter valid Contact
+                                        No!!!</p>
+                                </span>
+                            </div>
+                            <div class="mb-2">
+                                <label for="email" class="form-label">Email</label>
+                                <input #Email="ngModel" type="text" class="form-control"
+                                    [(ngModel)]="objSrv.regcred.Email" name="email" required
+                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                <span class="mt-1" *ngIf="!Email.valid&&(Email.touched||Email.dirty)">
+                                    <p class="text-danger" *ngIf="Email.errors?.required">*Email is Required!!!</p>
+                                    <p class="text-danger" *ngIf="Email.errors?.pattern">*Please Enter valid
+                                        Email!!!</p>
+                                </span>
+                            </div>
+                            <div class="mb-2">
+                                <label for="ename" class="form-label">Employer Name</label>
+                                <input #employername="ngModel" type="text" class="form-control"
+                                    [(ngModel)]="objSrv.regcred.EmployerName" name="empName">
+                            </div>
+                            <div class="mb-2">
+                                <label for="salary" class="form-label">Salary</label>
+                                <input #salary="ngModel" type="number" class="form-control"
+                                    [(ngModel)]="objSrv.regcred.Salary" name="salary">
+                            </div>
+                            <div class="mb-2">
+                                <label for="pan" class="form-label">Pan</label>
+                                <input #pan="ngModel" type="text" class="form-control" (keyup)="onKeyUp($event)"
+                                    [(ngModel)]="objSrv.regcred.Pan" name="pan" required
+                                    pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}">
+                                <span class="mt-1" *ngIf="!pan.valid&&(pan.touched||pan.dirty)">
+                                    <p class="text-danger" *ngIf="pan.errors?.required">*Pan is
+                                        Required!!!</p>
+                                    <p class="text-danger" *ngIf="pan.errors?.pattern">*Please Enter valid PAN
+                                        Id!!!</p>
+                                </span>
+                            </div>
+                            <div class="mb-2">
+                                <label for="password" class="form-label">Password</label>
+                                <input #password="ngModel" type="password" class="form-control"
+                                    [(ngModel)]="objSrv.regcred.Password" name="password" required>
+                                <span class="mt-1" *ngIf="!password.valid&&(password.touched||password.dirty)">
+                                    <p class="text-danger" *ngIf="password.errors?.required">*Password is
+                                        Required!!!</p>
+
+                                </span>
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button class="btn btn-primary" [disabled]="registerForm.invalid" type="submit">Register
+                                    User</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="mb-2">
-                    <label for="lname" class="form-label">Last Name</label>
-                    <input #lastname="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.LastName" name="lname" >
-                    </div>
-                    <div class="mb-2">
-                    <label for="dob" class="form-label">Date Of Birth</label>
-                    <input #dob="ngModel"type="date" class="form-control"[(ngModel)]="objSrv.regcred.DOB" name="dob" >
-                    </div>
-                    <div class="mb-2">
-                    <label for="contact" class="form-label">Contact</label>
-                    <input #contactno="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.ContactNo" name="contact" >
-                    </div>
-                    <div class="mb-2">
-                    <label for="email" class="form-label">Email</label>
-                    <input #email="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.Email" name="email" >
-                    </div>
-                    <div class="mb-2">
-                    <label for="ename" class="form-label">Employer Name</label>
-                    <input #employername="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.EmployerName" name="empName" >
-                    </div>
-                    <div class="mb-2">
-                    <label for="salary" class="form-label">Salary</label>
-                    <input #salary="ngModel"type="number" class="form-control" [(ngModel)]="objSrv.regcred.Salary" name="salary" >
-                    </div>
-                    <div class="mb-2">
-                    <label for="pan" class="form-label">Pan</label>
-                    <input #pan="ngModel"type="text" class="form-control" [(ngModel)]="objSrv.regcred.Pan" name="pan" >
-                    </div>
-                    <div class="mb-2">
-                    <label for="password" class="form-label">Password</label>
-                    <input #password="ngModel"type="password" class="form-control" [(ngModel)]="objSrv.regcred.Password" name="password" >
-                    </div>
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                    <button class="btn btn-primary"  type="submit">Register User</button>
-                    </div>      
-                </form>
-            </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>

@@ -8,28 +8,48 @@
 
                     <div class="p-4 border border-info" style="width: 400px; border-radius: 20px;">
                         <div>
+                            <form #contactForm="ngForm">
+                                <div class="mb-2">
+                                    <label for="sDate" class="form-label">Email</label>
+                                    <input #Email="ngModel" type="text" [(ngModel)]="contact.Email" class="form-control"
+                                        name="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                                    <span class="mt-1" *ngIf="!Email.valid&&(Email.touched||Email.dirty)">
+                                        <p class="text-danger" *ngIf="Email.errors?.required">*Email is Required!!!</p>
+                                        <p class="text-danger" *ngIf="Email.errors?.pattern">*Please Enter valid
+                                            Email!!!</p>
+                                    </span>
+                                </div>
+                                <div class=" mb-2">
+                                    <label for="duration" class="form-label">Phone Number</label>
+                                    <input #phn="ngModel" type="text" [(ngModel)]="contact.PhoneNumber"
+                                        class="form-control" name="PhoneNumber" pattern="[789][0-9]{9}" required>
+                                    <span class="mt-1" *ngIf="!phn.valid&&(phn.touched||phn.dirty)">
+                                        <p class="text-danger" *ngIf="phn.errors?.required">*Contact Detail is
+                                            Required!!!</p>
+                                        <p class="text-danger" *ngIf="phn.errors?.pattern">*Please Enter valid Contact
+                                            No!!!</p>
+                                    </span>
+                                </div>
+                                <div class="mb-2">
+                                    <label for="duration" class="form-label">Policy(optional)</label>
+                                    <select #pId class="form-control" name="" [(ngModel)]="contact.PolicyId">
+                                        <option value="">Select</option>
+                                        <option *ngFor="let p of policyList" value="{{p.PolicyId}}">{{p.PolicyName}}
+                                        </option>
+                                    </select>
 
-                            <div class="mb-2">
-                                <label for="sDate" class="form-label">Email</label>
-                                <input type="text" [(ngModel)]="contact.Email" class="form-control" name="Email">
-                            </div>
-                            <div class="mb-2">
-                                <label for="duration" class="form-label">Phone Number</label>
-                                <input type="text" [(ngModel)]="contact.PhoneNumber" class="form-control"
-                                    name="PhoneNumber">
-                            </div>
-                            <div class="mb-2">
-                                <label for="duration" class="form-label">Policy</label>
-                                <input type="string" [(ngModel)]="contact.PolicyId" class="form-control"
-                                    name="PolicyType">
-                            </div>
+                                </div>
 
-                            <div class="mb-2">
-                                <label for="companyName" class="form-label">Message</label>
-                                <textarea type="textarea" [(ngModel)]="contact.Message" class="form-control"
-                                    name="Message"></textarea>
-                            </div>
-                            <button class="btn btn-primary" (click)="save()" type="submit">Send</button>
+                                <div class="mb-2">
+                                    <label for="companyName" class="form-label">Message</label>
+                                    <textarea #msg="ngModel" type="textarea" [(ngModel)]="contact.Message"
+                                        class="form-control" name="Message" required></textarea>
+                                    <span *ngIf="!msg.valid && (msg.touched||msg.dirty)">
+                                        <p class="text-danger">*Message is Required</p>
+                                    </span>
+                                </div>
+                                <button [disabled]="contactForm.invalid"  class="btn btn-primary" (click)="save()" type="submit">Send</button>
+                            </form>
                         </div>
                     </div>
                 </div>

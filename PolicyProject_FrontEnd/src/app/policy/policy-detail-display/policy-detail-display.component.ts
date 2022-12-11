@@ -17,17 +17,24 @@ handleOnChange(){
 console.log(this.option)
 }
 
-updatePolicyDetailStatus(policyDetailId){
-this.policyDetailSrv.updatePolicyDetailStatus(policyDetailId,{Status:this.option}).subscribe(res=>{
-  alert(`Policy Request ${this.option}` );
+updatePolicyDetailStatus(policyDetailId,Status){
+  
+  if(Status){
+this.policyDetailSrv.updatePolicyDetailStatus(policyDetailId,{Status:Status}).subscribe(res=>{
+  alert(`Policy Request updated` );
+  window.location.reload();
 
 },err=>alert("Something Went Wrong"))
+  }else{
+    alert("Please Select Valid Option!!")
+  }
 }
 
   ngOnInit(): void {
     this.local=localStorage;
     this.policyDetailSrv.getPolicyDetails().subscribe(res=>{
       this.policyDetails=res["Data"] as PolicyRequest[];
+      this.option=this.policyDetails["Status"];
     })
   }
 

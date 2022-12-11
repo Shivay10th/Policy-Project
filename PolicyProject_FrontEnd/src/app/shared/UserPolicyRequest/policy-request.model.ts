@@ -10,4 +10,5 @@ export class PolicyRequest {
          TermsPerYear;
          TermsAmount;
          Status; 
+         Option;
 }

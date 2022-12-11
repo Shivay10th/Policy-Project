@@ -23,6 +23,11 @@ export class UserRegisterComponent implements OnInit {
     }
   }
 
+  onKeyUp(e){
+    
+    this.objSrv.regcred.Pan=e.target.value.toUpperCase();
+  }
+
   register(form:NgForm){
     this.objSrv.register().subscribe(res=>{
       this.resetForm(form)
