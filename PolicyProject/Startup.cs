@@ -45,12 +45,6 @@ namespace PolicyProject
                 option.AssumeDefaultVersionWhenUnspecified = true;
             });
 
-            services.AddVersionedApiExplorer(option =>
-            {
-                option.GroupNameFormat = "'v'VVV";
-                option.SubstituteApiVersionInUrl = true;
-            }
-            );
 
             services.AddSwaggerGen(c =>
             {

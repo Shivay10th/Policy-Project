@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace PolicyProject.Controllers.v1
 {
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/policy/category")]
     [ApiController]
     [Authorize(Roles = "admin")]
     public class PolicyTypeController : ControllerBase
