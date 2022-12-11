@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Policy } from '../shared/policy/policy.model';
 import { PolicyService } from '../shared/policy/policy.service';
+import { PolicyRequest } from '../shared/UserPolicyRequest/policy-request.model';
+import { PolicyRequestService } from '../shared/UserPolicyRequest/policy-request.service';
 
 @Component({
   selector: 'app-maturity-calc',
@@ -10,7 +12,7 @@ import { PolicyService } from '../shared/policy/policy.service';
 })
 export class MaturityCalcComponent implements OnInit {
 
-  constructor(public policyService:PolicyService) { }
+  constructor(public policyService:PolicyService,private policyRequestSrv:PolicyRequestService) { }
 
   policyList:Policy[]
   selectedPolicy :Policy = new Policy();
@@ -23,22 +25,28 @@ export class MaturityCalcComponent implements OnInit {
   endDate:Date;
 
   maturityAmount:number;
-
+  policyRequest:PolicyRequest = new PolicyRequest();
 
   id :number
   ngOnInit(): void {
-    this.policyService.getPolicyLists().subscribe(res=>{
+    this.policyService.getPolicyList().subscribe(res=>{
       this.policyList = res["Data"] as Policy[];
       console.log(this.selectedPolicy);
       
     });
   }
-  
-maturityForm= new FormGroup({
-  
-});
+  buyOption:boolean=false;
+
 
   calcMaturityAmount(){
+    this.policyRequest.Duration=this.durationInYr;
+    this.policyRequest.InitialDeposite=this.intitalDepo;
+    this.policyRequest.StartDate=this.startDate;
+    this.policyRequest.TermsAmount=this.termAmount;
+    this.policyRequest.TermsPerYear=this.termsPerYr;
+    this.policyRequest.PolicyId=this.selectedPolicy.PolicyId;
+    this.policyRequest.UserId=localStorage.getItem("userId");
+    this.buyOption=true;
     this.maturityAmount = this.intitalDepo  + 2*(this.durationInYr+this.termsPerYr+this.termAmount) * (this.selectedPolicy.Interest/100);
     let sdate = new Date(this.startDate);
     let year = sdate.getFullYear()+this.durationInYr;
@@ -48,6 +56,15 @@ maturityForm= new FormGroup({
   changeHandle(){
       this.selectedPolicy=this.policyList.filter(p=>p.PolicyId==this.id)[0] as Policy;
 
+  }
+  buyPolicy(){
+    if(confirm('Do u Want to Buy this Policy')){
+      this.policyRequestSrv.requestAPolicy(this.policyRequest).subscribe(res=>{
+        
+        console.log(res);
+        
+      });
+    }
   }
 
 }

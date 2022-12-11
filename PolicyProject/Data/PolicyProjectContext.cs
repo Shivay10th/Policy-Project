@@ -18,6 +18,7 @@ namespace PolicyProject.Data
 
         public DbSet<PolicyProject.Models.Policy> Policy { get; set; }
         public DbSet<PolicyProject.Models.PolicyType> PolicyType { get; set; }
+        public DbSet<PolicyProject.Models.PolicyDetail> PolicyDetails { get; set; }
         public DbSet<PolicyProject.Models.Contact> Contact { get; set; }
     }
 }

@@ -18,7 +18,7 @@ export class AuthGuardGuard implements CanActivate {
    ){
     var token = localStorage.getItem("jwt");
     var role = JSON.parse(atob(token.split(".")[1]))["role"];
-      if (this.authservice.isAuthenticated && route.data.expectedRole===role) {
+      if (this.authservice.isAuthenticated && (route.data.expectedRole==="any"||route.data.expectedRole===role)) {
         return true;
       } else {
         this.router.navigate(["login"]);

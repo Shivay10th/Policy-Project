@@ -16,25 +16,31 @@
                     class="text-warning">o</span><span class="text-danger">fi</span><span
                     style="color: rgb(35,157,170);">le</span></p>
                 <div class="bg bg-lightblue px-4 "><strong class="mt-2">Name:</strong><span
-                    class="ms-2 ">{{userProfile.FirstName+" "+userProfile.LastName|titlecase }}</span></div><br />
+                    class="ms-2 ">{{userProfile?.FirstName+" "+userProfile?.LastName|titlecase }}</span></div><br />
                 <div class="bg bg-lightblue px-4 "><strong class="mt-2">Date Of Birth:</strong><span
-                    class="ms-2">{{userProfile.DOB|date:"longDate"}}</span></div><br />
+                    class="ms-2">{{userProfile?.DOB|date:"longDate"}}</span></div><br />
                 <div class="bg bg-lightblue px-4 "><strong class="mt-2">Contact No:</strong><span
-                    class="ms-2">{{userProfile.ContactNo}}</span></div><br />
+                    class="ms-2">{{userProfile?.ContactNo}}</span></div><br />
                 <div class="bg bg-lightblue px-4 "><strong class="mt-2">Email :</strong><span
-                    class="ms-2">{{userProfile.Email}}</span></div><br />
+                    class="ms-2">{{userProfile?.Email}}</span></div><br />
                 <div class="bg bg-lightblue px-4 "><strong class="mt-2">Salary:</strong><span
-                    class="ms-2">{{userProfile.Salary|currency:"INR"}}</span></div><br />
+                    class="ms-2">{{userProfile?.Salary|currency:"INR"}}</span></div><br />
                 <div class="bg bg-lightblue px-4 "><strong class="mt-2">Pan:</strong><span
-                    class="ms-2">{{userProfile.Pan|uppercase}}</span></div><br />
+                    class="ms-2">{{userProfile?.Pan|uppercase}}</span></div><br />
                 <div class="bg bg-lightblue px-4 "><strong class="mt-2">Emmployer Name:</strong><span
-                    class="ms-2">{{userProfile.EmployerName|titlecase}}</span></div><br />
+                    class="ms-2">{{userProfile?.EmployerName|titlecase}}</span></div><br />
                 <div class="row " *ngIf="local.role==='admin'">
                   <button class="btn btn-success mt-2 col-md-3 mx-1" routerLink="/policy/register">Register New
                     Policy</button>
                   <button class="btn btn-success mt-2 col-md-3 mx-1" routerLink="/policy/categories">Edit
                     Categories</button>
+                  <button class="btn btn-success mt-2 col-md-3 mx-1" routerLink="/admin/policy/all">All Policy
+                    Request</button>
                   <button class="btn btn-success mt-2 col-md-3 mx-1" routerLink="/contact/all">See FeedBacks</button>
+                </div>
+                <div class="row " *ngIf="local.role==='customer'">
+                  <button class="btn btn-success mt-2 col-md-3 mx-1" routerLink="/user/policy/all">Your
+                    Policies</button>
                 </div>
               </div>
               <div class="col-md-6 col-lg-3 col-xl-4 d-flex align-items-center mt-4 ms-2 order-1 order-lg-2"

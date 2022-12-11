@@ -1,0 +1,71 @@
+<section class="mt-2" style="background-color: #eee; border-radius: 20px;">
+
+    <div class="container ">
+        <p class="text-center h1 fw-bold pt-5 mb-5 mx-1 mx-md-4 mt-4">All Policy Requests</p>
+        <div class="d-flex justify-content-center " style="height: 100%;">
+            <div class="card text-black" style="border-radius: 25px;">
+                <div class="card-body p-md-5">
+                    <div class="row flex-justify-content ">
+
+                        <div class="col-lg-3 col-md-6 card mx-4 mt-4 " style="width: 18rem;"
+                            *ngFor="let p of policyDetails">
+
+                            <div class="card-header h3 text-center pb-1">
+                                {{p.Policy.PolicyName|uppercase}}
+                            </div>
+                            <ul class="list-group list-group-flush">
+
+                                <li class="list-group-item pb-1 text-success"><strong>User's Name:</strong><span
+                                        class="ms-2">{{p.User.FirstName+" "+ p.User.LastName|uppercase}}</span></li>
+
+                                <li class="list-group-item pb-1 text-success"><strong>User's Email:</strong><span
+                                        class="ms-2">{{p.User.Email|uppercase}}</span></li>
+                                <li class="list-group-item pb-1 text-success"><strong>User's Salary:</strong><span
+                                        class="ms-2">{{p.User.Salary}}</span></li>
+                                <li class="list-group-item pb-1 text-success"><strong>User's Contact No:</strong><span
+                                        class="ms-2">{{p.User.ContactNo}}</span></li>
+                                <li class="list-group-item pb-1 text-success"><strong>User's Pan:</strong><span
+                                        class="ms-2">{{p.User.Pan|uppercase}}</span></li>
+                                <li class="list-group-item pb-1 text-success"><strong>User's Employer
+                                        Name:</strong><span class="ms-2">{{p.User.EmployerName}}</span></li>
+                                <hr>
+                                <li class="list-group-item pb-1"><strong>Start Date:</strong><span
+                                        class="ms-2">{{p.StartDate|date:'longDate'}}</span></li>
+                                <li class="list-group-item pb-1"><strong>Duration:</strong><span
+                                        class="ms-2">{{p.Duration}}</span></li>
+                                <li class="list-group-item pb-1"><strong>Company Name:</strong><span
+                                        class="ms-2">{{p.Policy.CompanyName}}</span></li>
+                                <li class="list-group-item pb-1"><strong>Initial Deposite:</strong><span
+                                        class="ms-2">{{p.InitialDeposite}}</span>
+                                </li>
+                                <li class="list-group-item pb-1"><strong>Terms Per Year:</strong><span
+                                        class="ms-2">{{p.TermsPerYear}}</span>
+                                </li>
+                                <li class="list-group-item pb-1"><strong>Interest:</strong><span
+                                        class="ms-2">{{p.Policy.Interest}}</span></li>
+                                <li class="list-group-item pb-1"
+                                    [ngClass]="p.Status==='pending'?'text-danger':'text-success'">
+                                    <strong>Request Status:</strong><span class="ms-2">{{p.Status|uppercase}}</span>
+                                </li>
+
+                                <div class="p-2 row" *ngIf="local.jwt!=undefined && local.role==='admin'">
+                                    <select name="" id="" [(ngModel)]="option" (change)="handleOnChange()">
+                                        <option value="" class="text-center">
+                                            -------------Select-------------</option>
+                                        <option value="accepted">Accept</option>
+                                        <option value="rejected">Reject</option>
+                                    </select>
+                                    <div class="btn btn-primary  m-1"
+                                        (click)="updatePolicyDetailStatus(p.PolicyDetailId)"><i
+                                            class="fa-sharp fa-solid fa-diagram-next"></i>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -14,7 +14,6 @@ export class UserLoginComponent implements OnInit {
 
   constructor(public objSrv:AuthService,private route:Router) {
     this.status= new Status();
-    console.log(this.status)
    }
 
   ngOnInit(): void {
@@ -44,11 +43,8 @@ export class UserLoginComponent implements OnInit {
       
       this.route.navigate(["user/profile"],{state:{status:this.status}});
     },err=>{
-      console.log(this.status);
-      console.log(typeof this.status)
       this.status.error=true;
       this.status.message=err.error["Message"];
-      console.log(err)
       
     }) 
   }

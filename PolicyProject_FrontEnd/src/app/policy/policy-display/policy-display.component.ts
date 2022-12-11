@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Policy } from 'src/app/shared/policy/policy.model';
 import { PolicyService } from 'src/app/shared/policy/policy.service';
 
 @Component({
@@ -12,8 +13,11 @@ export class PolicyDisplayComponent implements OnInit {
   constructor(public objSrv:PolicyService,private route:Router) { }
 
   local:any;
+  policyList:Policy[]
   ngOnInit(): void {
-    this.objSrv.getPolicyList();
+    this.objSrv.getPolicyList().subscribe(res=>{
+      this.policyList=res["Data"] as Policy[];
+    });
     this.local=localStorage;
   }
   del(PolicyId){

@@ -81,6 +81,10 @@
                                     (click)="calcMaturityAmount()">Calculate
                                     Maturity</button>
                             </div>
+                            <div class="d-grid gap-2 col-6 mx-auto mt-2">
+                                <button class="btn btn-success" [style.display]="!buyOption?'none':''"
+                                    (click)="buyPolicy()">Buy</button>
+                            </div>
                         </form>
                     </div>
                     <div class="card pt-2 mt-2" style="border-radius: 20px;">

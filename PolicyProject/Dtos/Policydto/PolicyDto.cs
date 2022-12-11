@@ -1,4 +1,4 @@
-﻿using PolicyProject.Models;
+﻿using PolicyProject.Dtos.PolicyTypedto;
 using System;
 
 namespace PolicyProject.Dtos.Policydto
@@ -17,7 +17,7 @@ namespace PolicyProject.Dtos.Policydto
         public double Interest { get; set; }
 
         public int PolicyTypeId { get; set; }
-        public PolicyType PolicyType { get; set; }
+        public PolicyTypeDto PolicyType { get; set; }
 
     }
 }

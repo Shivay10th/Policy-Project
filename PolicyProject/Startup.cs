@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using PolicyProject.Data;
+using PolicyProject.Services.PolicyDetailService;
 using PolicyProject.Services.PolicyServices;
 using PolicyProject.Services.PolicyTypeServices;
 using Serilog;
@@ -83,6 +84,8 @@ namespace PolicyProject
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IPolicyTypeService, PolicyTypeService>();
             services.AddScoped<IPolicyservice, PolicyService>();
+            services.AddScoped<IPolicyDetailService, PolicyDetailService>();
+
 
 
         }

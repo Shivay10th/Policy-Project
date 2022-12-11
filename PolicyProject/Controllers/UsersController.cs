@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PolicyProject.Data;
+using PolicyProject.Dtos.User;
 using PolicyProject.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +19,12 @@ namespace PolicyProject.Controllers
     public class UsersController : ControllerBase
     {
         private readonly PolicyProjectContext _context;
+        private readonly IMapper _mapper;
 
-        public UsersController(PolicyProjectContext context)
+        public UsersController(PolicyProjectContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Users
@@ -33,7 +37,7 @@ namespace PolicyProject.Controllers
         // GET: api/Users/5
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<GetUserDto>> GetUser(int id)
         {
             var user = await _context.User.FindAsync(id);
 
@@ -41,8 +45,9 @@ namespace PolicyProject.Controllers
             {
                 return NotFound();
             }
+            GetUserDto userDto = _mapper.Map<GetUserDto>(user);
 
-            return user;
+            return Ok(userDto);
         }
 
         // PUT: api/Users/5

@@ -111,7 +111,6 @@ namespace PolicyProject.Services.PolicyServices
                 if (p != null)
                 {
                     p.PolicyName = policy.PolicyName;
-                    p.PolicyType = policy.PolicyType;
                     p.PolicyTypeId = policy.PolicyTypeId;
                     p.StartDate = policy.StartDate;
                     p.Duration = policy.Duration;

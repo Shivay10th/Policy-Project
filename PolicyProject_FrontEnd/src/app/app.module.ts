@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {CommonModule} from '@angular/common'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +9,7 @@ import { UserRegisterComponent } from './user/user-register/user-register.compon
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { NavComponent } from './navigation/nav/nav.component';
 import { HomeComponent } from './home/home/home.component';
-import { FormGroup, FormsModule, NG_VALIDATORS, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PolicyRegComponent } from './policy/policy-reg/policy-reg.component';
 import { PolicyDisplayComponent } from './policy/policy-display/policy-display.component';
@@ -26,6 +26,8 @@ import { ContactDisplayComponent } from './contact/contact-display/contact-displ
 import { JwtInterceptorSrvService } from './shared/auth/jwt-interceptor-srv.service';
 import { MinvalDirective } from './shared/directives/formvalidation/minval.directive';
 import { MaxvalDirective } from './shared/directives/formvalidation/maxval.directive';
+import { UserPolicyDisplayComponent } from './user/user-policy-display/user-policy-display.component';
+import { PolicyDetailDisplayComponent } from './policy/policy-detail-display/policy-detail-display.component';
 
 
 @NgModule({
@@ -50,16 +52,17 @@ import { MaxvalDirective } from './shared/directives/formvalidation/maxval.direc
     ContactDisplayComponent,
     MinvalDirective,
     MinvalDirective,
-    MaxvalDirective
+    MaxvalDirective,
+    UserPolicyDisplayComponent,
+    PolicyDetailDisplayComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-
   ],
   providers: [
     {
