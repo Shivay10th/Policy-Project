@@ -6,9 +6,10 @@ using PolicyProject.Services.PolicyTypeServices;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PolicyProject.Controllers
+namespace PolicyProject.Controllers.v1
 {
-    [Route("api/policy/category")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [Authorize(Roles = "admin")]
     public class PolicyTypeController : ControllerBase

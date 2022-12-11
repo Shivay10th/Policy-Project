@@ -4,9 +4,10 @@ using PolicyProject.Dtos.User;
 using PolicyProject.Models;
 using System.Threading.Tasks;
 
-namespace PolicyProject.Controllers
+namespace PolicyProject.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -20,7 +21,7 @@ namespace PolicyProject.Controllers
         public async Task<IActionResult> Register(UserRegisterDto request)
         {
             // todo: remove role from request
-            ServiceResponse<int> res = await _authRepository.Register(new Models.User
+            ServiceResponse<int> res = await _authRepository.Register(new User
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ using PolicyProject.Services.PolicyDetailService;
 using PolicyProject.Services.PolicyServices;
 using PolicyProject.Services.PolicyTypeServices;
 using Serilog;
+using System.Linq;
 
 namespace PolicyProject
 {
@@ -29,7 +31,6 @@ namespace PolicyProject
         public void ConfigureServices(IServiceCollection services)
         {
 
-            // To Ignore the loop while fetchin policies
             services.AddControllers().AddNewtonsoftJson(x =>
             {
 
@@ -38,9 +39,26 @@ namespace PolicyProject
                 x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
+            services.AddApiVersioning(option =>
+            {
+                option.DefaultApiVersion = new ApiVersion(1, 0);
+                option.AssumeDefaultVersionWhenUnspecified = true;
+            });
+
+            services.AddVersionedApiExplorer(option =>
+            {
+                option.GroupNameFormat = "'v'VVV";
+                option.SubstituteApiVersionInUrl = true;
+            }
+            );
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My Api v1", Version = "v1" });
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "My Api v2", Version = "v2" });
+                c.ResolveConflictingActions(a => a.First());
+
+
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",
@@ -99,7 +117,11 @@ namespace PolicyProject
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"/swagger/v1/swagger.json", "Api v1");
+                c.SwaggerEndpoint($"/swagger/v1/swagger.json", "Api v2");
+            });
             //cors for frontend
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 

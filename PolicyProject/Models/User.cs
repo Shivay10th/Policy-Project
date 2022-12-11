@@ -23,7 +23,9 @@ namespace PolicyProject.Models
         public string Email { get; set; }
 
         public double Salary { get; set; }
-        [StringLength(10)]
+        [StringLength(10, MinimumLength = 10)]
+        [Required]
+
         public string Pan { get; set; }
         [Column(TypeName = "char(1)")]
         public string EmployerType { get; set; }

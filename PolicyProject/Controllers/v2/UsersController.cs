@@ -8,10 +8,10 @@ using PolicyProject.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace PolicyProject.Controllers
+namespace PolicyProject.Controllers.v2
 {
-    [Route("api/[controller]")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
 
     [Authorize(Roles = "admin")]
@@ -29,6 +29,7 @@ namespace PolicyProject.Controllers
 
         // GET: api/Users
         [HttpGet]
+        [MapToApiVersion("2.0")]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
             return await _context.User.ToListAsync();
@@ -36,6 +37,8 @@ namespace PolicyProject.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
+        [MapToApiVersion("2.0")]
+
         [AllowAnonymous]
         public async Task<ActionResult<GetUserDto>> GetUser(int id)
         {
@@ -54,6 +57,8 @@ namespace PolicyProject.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [MapToApiVersion("2.0")]
+
         public async Task<IActionResult> PutUser(int id, User user)
         {
             if (id != user.Id)
@@ -88,6 +93,8 @@ namespace PolicyProject.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [MapToApiVersion("2.0")]
+
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _context.User.Add(user);
@@ -96,21 +103,7 @@ namespace PolicyProject.Controllers
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
-        {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
 
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return user;
-        }
 
         private bool UserExists(int id)
         {
