@@ -4,8 +4,9 @@ using PolicyProject.Data;
 using PolicyProject.Dtos.Policydto;
 using PolicyProject.Models;
 using PolicyProject.Services.PolicyServices;
+using Serilog;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PolicyProject.Controllers.v1
@@ -67,9 +68,7 @@ namespace PolicyProject.Controllers.v1
             }
         }
 
-        // PUT: api/Policies/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPolicy(int id, PolicyDto policy)
         {
@@ -83,14 +82,14 @@ namespace PolicyProject.Controllers.v1
             return BadRequest(res);
         }
 
-        // POST: api/Policies
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+
         [HttpPost]
         public async Task<IActionResult> PostPolicy(PolicyDto policy)
         {
             policy.PolicyType = null;
             ServiceResponse<PolicyDto> res = await _policyservice.AddPolicy(policy);
+            Log.Information("New Policy Resgistered at {now}", DateTime.Now);
+
             return Ok(res);
         }
 
@@ -101,15 +100,13 @@ namespace PolicyProject.Controllers.v1
             ServiceResponse<ICollection<PolicyDto>> res = await _policyservice.DeletePolicy(id);
             if (res.Success)
             {
+                Log.Warning("Policy with Id:{id} Deleted at {now} ", id, DateTime.Now);
 
                 return Ok(res);
             }
             return BadRequest(res);
         }
 
-        private bool PolicyExists(int id)
-        {
-            return _context.Policy.Any(e => e.PolicyId == id);
-        }
+
     }
 }

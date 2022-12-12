@@ -2,6 +2,8 @@
 using PolicyProject.Data;
 using PolicyProject.Dtos.User;
 using PolicyProject.Models;
+using Serilog;
+using System;
 using System.Threading.Tasks;
 
 namespace PolicyProject.Controllers.v1
@@ -37,8 +39,12 @@ namespace PolicyProject.Controllers.v1
             }, request.Password);
             if (!res.Success)
             {
+                Log.Warning("{email} register at {now} Failed", request.Email, DateTime.Now);
+
                 return BadRequest(res);
             }
+            Log.Information("{email} register at {now} Success", request.Email, DateTime.Now);
+
             return Ok(res);
         }
 
@@ -49,8 +55,10 @@ namespace PolicyProject.Controllers.v1
             ServiceResponse<string> res = await _authRepository.Login(req.Email, req.Password);
             if (!res.Success)
             {
+                Log.Warning("{email} logged in at {now} Failed", req.Email, DateTime.Now);
                 return BadRequest(res);
             }
+            Log.Information("{email} logged in at {now} Success", req.Email, DateTime.Now);
             return Ok(res);
         }
     }
