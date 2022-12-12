@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PolicyProject.Data;
 using PolicyProject.Dtos.Policydto;
 using PolicyProject.Models;
 using PolicyProject.Services.PolicyServices;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,11 +19,13 @@ namespace PolicyProject.Controllers.v1
     {
         private readonly PolicyProjectContext _context;
         private readonly IPolicyservice _policyservice;
+        private readonly ILogger<PoliciesController> _logger;
 
-        public PoliciesController(PolicyProjectContext context, IPolicyservice policyservice)
+        public PoliciesController(PolicyProjectContext context, IPolicyservice policyservice, ILogger<PoliciesController> logger)
         {
             _context = context;
             _policyservice = policyservice;
+            _logger = logger;
         }
 
         // GET: api/Policies
@@ -88,7 +90,7 @@ namespace PolicyProject.Controllers.v1
         {
             policy.PolicyType = null;
             ServiceResponse<PolicyDto> res = await _policyservice.AddPolicy(policy);
-            Log.Information("New Policy Resgistered at {now}", DateTime.Now);
+            _logger.LogInformation("New Policy Resgistered at {now}", DateTime.Now);
 
             return Ok(res);
         }
@@ -100,7 +102,7 @@ namespace PolicyProject.Controllers.v1
             ServiceResponse<ICollection<PolicyDto>> res = await _policyservice.DeletePolicy(id);
             if (res.Success)
             {
-                Log.Warning("Policy with Id:{id} Deleted at {now} ", id, DateTime.Now);
+                _logger.LogWarning("Policy with Id:{id} Deleted at {now} ", id, DateTime.Now);
 
                 return Ok(res);
             }

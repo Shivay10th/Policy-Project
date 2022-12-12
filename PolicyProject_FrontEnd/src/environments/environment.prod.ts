@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  host:"https://policyproject.azurewebsites.net/api/"
+  host:"https://policyproject.azurewebsites.net/api/v1"
 };

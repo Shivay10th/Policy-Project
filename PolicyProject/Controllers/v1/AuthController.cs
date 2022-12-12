@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PolicyProject.Data;
 using PolicyProject.Dtos.User;
 using PolicyProject.Models;
-using Serilog;
 using System;
 using System.Threading.Tasks;
 
@@ -14,10 +14,12 @@ namespace PolicyProject.Controllers.v1
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepository;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(IAuthRepository authRepository)
+        public AuthController(IAuthRepository authRepository, ILogger<AuthController> logger)
         {
             _authRepository = authRepository;
+            _logger = logger;
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register(UserRegisterDto request)
@@ -39,11 +41,11 @@ namespace PolicyProject.Controllers.v1
             }, request.Password);
             if (!res.Success)
             {
-                Log.Warning("{email} register at {now} Failed", request.Email, DateTime.Now);
+                _logger.LogError("{email} register at {now} Failed", request.Email, DateTime.Now);
 
                 return BadRequest(res);
             }
-            Log.Information("{email} register at {now} Success", request.Email, DateTime.Now);
+            _logger.LogInformation("{email} register at {now} Success", request.Email, DateTime.Now);
 
             return Ok(res);
         }
@@ -55,10 +57,10 @@ namespace PolicyProject.Controllers.v1
             ServiceResponse<string> res = await _authRepository.Login(req.Email, req.Password);
             if (!res.Success)
             {
-                Log.Warning("{email} logged in at {now} Failed", req.Email, DateTime.Now);
+                _logger.LogWarning("{email} logged in at {now} Failed", req.Email, DateTime.Now);
                 return BadRequest(res);
             }
-            Log.Information("{email} logged in at {now} Success", req.Email, DateTime.Now);
+            _logger.LogInformation("{email} logged in at {now} Success", req.Email, DateTime.Now);
             return Ok(res);
         }
     }

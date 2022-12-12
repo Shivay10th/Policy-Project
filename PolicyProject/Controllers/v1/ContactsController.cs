@@ -1,9 +1,8 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PolicyProject.Data;
 using PolicyProject.Models;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +16,12 @@ namespace PolicyProject.Controllers.v1
     public class ContactsController : ControllerBase
     {
         private readonly PolicyProjectContext _context;
+        private readonly ILogger<ContactsController> _logger;
 
-        public ContactsController(PolicyProjectContext context)
+        public ContactsController(PolicyProjectContext context, ILogger<ContactsController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Contacts
@@ -50,7 +51,7 @@ namespace PolicyProject.Controllers.v1
         {
             _context.Contact.Add(contact);
             await _context.SaveChangesAsync();
-            Log.Information("{email} Send a Feedback {now} Failed", contact.Email, DateTime.Now);
+            _logger.LogInformation("{email} Send a Feedback at {now} ", contact.Email, DateTime.Now);
 
             return CreatedAtAction("GetContact", new { id = contact.ContactId }, contact);
         }

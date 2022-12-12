@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using PolicyProject.Dtos.PolicyDetailDto;
 using PolicyProject.Models;
 using PolicyProject.Services.PolicyDetailService;
-using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,10 +16,12 @@ namespace PolicyProject.Controllers.v1
     public class PolicyDetailController : ControllerBase
     {
         private readonly IPolicyDetailService _policydetailservice;
+        private readonly ILogger<PoliciesController> _logger;
 
-        public PolicyDetailController(IPolicyDetailService policydetailservice)
+        public PolicyDetailController(IPolicyDetailService policydetailservice, ILogger<PoliciesController> logger)
         {
             _policydetailservice = policydetailservice;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -51,7 +53,7 @@ namespace PolicyProject.Controllers.v1
             res = await _policydetailservice.RequestPolicy(policyDetailDto);
             if (res.Success)
             {
-                Log.Warning("New Policy Request added By UserId{id} at {now}", policyDetailDto.UserId, DateTime.Now);
+                _logger.LogWarning("New Policy Request added By UserId{id} at {now}", policyDetailDto.UserId, DateTime.Now);
 
                 return Ok(res);
             }
